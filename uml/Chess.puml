@@ -1,0 +1,17 @@
+@startuml
+
+class Tablero {
+    +void print()
+}
+
+class Celda {
+    -int fila
+    -int columna
+}
+
+Tablero *--> "8x8" Celda
+Celda o--> Ficha
+Ficha <|-- O
+Ficha <|-- X
+
+@enduml
