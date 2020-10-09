@@ -1,5 +1,6 @@
 #pragma once
 #include "Celda.hh"
+#include <iostream>
 #include <vector>
 
 class Tablero {
@@ -11,7 +12,12 @@ class Tablero {
                 }
             }
         }
+
+        friend std::ostream &operator<<(std::ostream &os, Tablero &obj) {
+            return obj.printObject(os);
+        }
     private:
         std::vector<const Celda*> celdas;
         int dimension_;
+        std::ostream &printObject(std::ostream &os);
 };
