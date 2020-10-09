@@ -1,23 +1,16 @@
 #pragma once
 #include "Celda.hh"
 #include <iostream>
-#include <vector>
+#include <map>
+#include <utility>
+#include "EstadoInicial.hh"
 
 class Tablero {
     public:
-        Tablero(): dimension_(8) {
-            for(int i=0; i<dimension_; ++i) {
-                for(int j=0; j<dimension_; ++j) {
-                    celdas.push_back(new Celda(i, j));
-                }
-            }
-        }
-
-        friend std::ostream &operator<<(std::ostream &os, Tablero &obj) {
-            return obj.printObject(os);
-        }
+        Tablero();
+        friend std::ostream &operator<<(std::ostream &os, Tablero &obj) {return obj.printObject(os);}
     private:
-        std::vector<const Celda*> celdas;
-        int dimension_;
+        const int dimension_ = 8;
+        std::map<std::pair<int, int>, const Celda*> celdas;
         std::ostream &printObject(std::ostream &os);
 };

@@ -9,9 +9,15 @@ class Celda {
     -int columna
 }
 
+Jugador --> Tablero
+
 Tablero *--> "8x8" Celda
 Celda o--> Ficha
 Ficha <|-- O
 Ficha <|-- X
+
+Tablero --> EstadoInicial
+Estado <|-- EstadoInicial
+Estado <|-- EstadoFinal
 
 @enduml
