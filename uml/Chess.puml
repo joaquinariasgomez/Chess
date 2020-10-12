@@ -5,16 +5,22 @@ class Tablero {
 }
 
 class Celda {
+    +std::string print()
     -int fila
     -int columna
+}
+
+class Ficha {
+    +std::string print()
+    -bool oponente
 }
 
 Jugador --> Tablero
 
 Tablero *--> "8x8" Celda
-Celda o--> Ficha
-Ficha <|-- O
-Ficha <|-- X
+Celda o--> "0..1" Ficha
+Ficha <|-- FichaO
+Ficha <|-- FichaX
 
 Tablero --> EstadoInicial
 Estado <|-- EstadoInicial

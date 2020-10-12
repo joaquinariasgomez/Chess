@@ -3,7 +3,6 @@
 #include <iostream>
 #include <map>
 #include <utility>
-#include "EstadoInicial.hh"
 
 class Tablero {
     public:

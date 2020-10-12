@@ -1,9 +1,10 @@
 #include "Tablero.hh"
+#include "EstadoInicial.hh"
 
 Tablero::Tablero() {
     for(int i=0; i<dimension_; ++i) {
         for(int j=0; j<dimension_; ++j) {
-            celdas[{i,j}] = new Celda(i,j);
+            celdas[{i,j}] = new Celda(i,j,EstadoInicial::getElementFromCelda(i,j));
         }
     }
 }
@@ -24,6 +25,5 @@ std::ostream &Tablero::printObject(std::ostream &os) {
     }
     os << "+" << std::endl;
   }
-  std::cout << EstadoInicial::getElementFromCelda(0,0) << std::endl;
   return os;
 }
