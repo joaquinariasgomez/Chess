@@ -4,6 +4,12 @@ class Tablero {
     +void print()
 }
 
+class Accion {
+    +void mover()
+    -string celda
+    -string direccion
+}
+
 class Celda {
     +std::string print()
     -int fila
@@ -15,7 +21,8 @@ class Ficha {
     -bool oponente
 }
 
-Jugador --> Tablero
+Jugador --> Accion
+Accion --> Tablero
 
 Tablero *--> "8x8" Celda
 Celda o--> "0..1" Ficha
