@@ -1,7 +1,11 @@
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
-project(recipe-01 LANGUAGES CXX)
+
+project(myGame LANGUAGES CXX)
+
+find_package(SFML 2.5.1 COMPONENTS system window graphics network audio)
+
 add_library(estadoInicial
     STATIC
         scripts/tablero/EstadoInicial.hh
@@ -37,12 +41,13 @@ add_library(fichaX
         scripts/tablero/FichaX.hh
         scripts/tablero/FichaX.cc
     )
-add_executable(main scripts/main.cc)
+add_executable(myGame scripts/main.cc)
+target_link_libraries(myGame sfml-graphics sfml-window sfml-system)
 target_link_libraries(accion tablero)
 target_link_libraries(tablero estadoInicial)
 target_link_libraries(tablero celda)
 target_link_libraries(celda ficha)
 target_link_libraries(ficha fichaO)
 target_link_libraries(ficha fichaX)
-target_link_libraries(main tablero)
-target_link_libraries(main accion)
+target_link_libraries(myGame tablero)
+target_link_libraries(myGame accion)
