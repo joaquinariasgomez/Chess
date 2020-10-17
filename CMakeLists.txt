@@ -41,6 +41,11 @@ add_library(fichaX
         scripts/tablero/FichaX.hh
         scripts/tablero/FichaX.cc
     )
+add_library(window
+    STATIC
+    scripts/graphics/Window.hh
+    scripts/graphics/Window.cc
+    )
 add_executable(myGame scripts/main.cc)
 target_link_libraries(myGame sfml-graphics sfml-window sfml-system)
 target_link_libraries(accion tablero)
@@ -51,3 +56,4 @@ target_link_libraries(ficha fichaO)
 target_link_libraries(ficha fichaX)
 target_link_libraries(myGame tablero)
 target_link_libraries(myGame accion)
+target_link_libraries(myGame window)

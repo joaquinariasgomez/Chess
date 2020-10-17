@@ -4,7 +4,7 @@
 #include <thread>         // std::this_thread::sleep_for
 #include <chrono>         // std::chrono::seconds
 #include <ctime>
-#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 void readUserMovementAndMove(Tablero& tablero) {
     // Leer acción
@@ -49,7 +49,10 @@ int main() {
         //readUserMovementAndMove(tablero);
         readAIMovementAndMove(tablero);
     }*/
-    sf::Window window(sf::VideoMode(800, 600), "Chess haha");
+    // create the window
+    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+
+    // run the program as long as the window is open
     while (window.isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
@@ -60,6 +63,16 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+
+        // clear the window with black color
+        window.clear(sf::Color::Black);
+
+        // draw everything here...
+        // window.draw(...);
+
+        // end the current frame
+        window.display();
     }
+
     return 0;
 }
