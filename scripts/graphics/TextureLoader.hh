@@ -4,7 +4,8 @@
 
 class TextureLoader {
     public:
-        TextureLoader();
+        TextureLoader(std::string textureName);
+        sf::Texture getTexture() const;
     private:
         const std::string route = "../res/";
         sf::Texture texture;
