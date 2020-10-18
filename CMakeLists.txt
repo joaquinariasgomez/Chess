@@ -9,8 +9,8 @@ find_package(SFML 2.5.1 COMPONENTS system window graphics network audio)
 file(GLOB SOURCES
     "scripts/*.hh"
     "scripts/*.cc"
-    "scripts/tablero/*.hh"
-    "scripts/tablero/*.cc"
+    "scripts/mapa/*.hh"
+    "scripts/mapa/*.cc"
     "scripts/graphics/*.hh"
     "scripts/graphics/*.cc"
 )

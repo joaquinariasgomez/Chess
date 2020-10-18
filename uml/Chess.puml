@@ -1,35 +1,32 @@
 @startuml
 
-class Tablero {
-    +void print()
+class Mapa {
+    -SpriteManager background
 }
 
 class Accion {
     +void mover()
-    -string celda
     -string direccion
 }
 
 class Celda {
-    +std::string print()
     -int fila
     -int columna
 }
 
-class Ficha {
-    +std::string print()
-    -bool oponente
+class Elemento {
+    
 }
 
 Jugador --> Accion
-Accion --> Tablero
+Accion --> Mapa
 
-Tablero *--> "8x8" Celda
-Celda o--> "0..1" Ficha
-Ficha <|-- FichaO
-Ficha <|-- FichaX
+Mapa *--> "8x8" Celda
+Celda o--> "0..1" Elemento
+Elemento <|-- Pared
+Elemento <|-- Agujero
 
-Tablero --> EstadoInicial
+Mapa --> EstadoInicial
 Estado <|-- EstadoInicial
 Estado <|-- EstadoFinal
 

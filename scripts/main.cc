@@ -1,5 +1,5 @@
 #include <iostream>
-#include "tablero/Tablero.hh"
+#include "mapa/Mapa.hh"
 #include "Accion.hh"
 #include <thread>         // std::this_thread::sleep_for
 #include <chrono>         // std::chrono::seconds
@@ -11,19 +11,10 @@ int main() {
     // create the window
     const int WIDTH = 1080;
     const int HEIGHT = 1080;
-    //TextureLoader T("sample");
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "My game kappa");
+    const int DIM = 6;
 
-    /*sf::Texture texture = TextureLoader::getTexture("sample");
-    sf::Texture texture2 = TextureLoader::getTexture("test");
-    sf::Sprite sprite;
-    sf::Sprite sprite2;
-    sprite.setTexture(texture);
-    sprite2.setTexture(texture2);*/
-    //sprite.setPosition(sf::Vector2f(0.f, 0.f)); // absolute position
-    //sprite2.setPosition(sf::Vector2f(0.f, 0.f)); // absolute position
-    //sprite.setScale(sf::Vector2f(10.f, 10.f)); // absolute scale factor
-    //sprite2.setScale(sf::Vector2f(10.f, 10.f)); // absolute scale factor
+    Mapa mapa(DIM);
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "My game kappa");
 
     SpriteManager sample(0, 0, "sample");
     SpriteManager test(100, 100, "test");
@@ -43,8 +34,7 @@ int main() {
         window.clear(sf::Color::White);
 
         // draw everything here...
-        window.draw(sample.getSprite());
-        window.draw(test.getSprite());
+        mapa.draw(window);
 
         // end the current frame
         window.display();

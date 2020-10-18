@@ -1,10 +1,10 @@
 #pragma once
-#include "tablero/Tablero.hh"
+#include "mapa/Mapa.hh"
 
 class Accion {
     public:
         Accion(std::string movimiento);
-        int move(Tablero& t) const;
+        int move(Mapa& t) const;
     private:
         int celdaX;
         int celdaY;

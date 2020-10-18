@@ -16,7 +16,7 @@ sf::Texture TextureLoader::getTexture(std::string textureName) {
         std::cout << "ERROR could not open texture " << textureName << std::endl;
     }
 
-    //Properties of texture
+    //Texture properties
     texture.setSmooth(false);
 
     return texture;
