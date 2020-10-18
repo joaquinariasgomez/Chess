@@ -1,12 +1,23 @@
 #pragma once
 #include <string>
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 class TextureLoader {
     public:
-        TextureLoader(std::string textureName);
-        sf::Texture getTexture() const;
-    private:
-        const std::string route = "../res/";
-        sf::Texture texture;
+        static sf::Texture getTexture(std::string textureName);
 };
+
+sf::Texture TextureLoader::getTexture(std::string textureName) {
+    const std::string ROUTE = "../res/";
+    sf::Texture texture;
+    if (!texture.loadFromFile(ROUTE+textureName+".png"))
+    {
+        std::cout << "ERROR could not open texture " << textureName << std::endl;
+    }
+
+    //Properties of texture
+    texture.setSmooth(false);
+
+    return texture;
+}
