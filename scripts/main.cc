@@ -6,18 +6,17 @@
 #include <ctime>
 #include <SFML/Graphics.hpp>
 #include "graphics/SpriteManager.hh"
+#include "graphics/Window.hh"
 
 int main() {
     // create the window
-    const int WIDTH = 1080;
-    const int HEIGHT = 1080;
     const int DIM = 6;
 
     Mapa mapa(DIM);
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "My game kappa");
+    sf::RenderWindow window(sf::VideoMode(Window::getWindowWidth(), Window::getWindowHeight()), "My game kappa");
 
-    SpriteManager sample(0, 0, "sample");
-    SpriteManager test(100, 100, "test");
+    //SpriteManager sample(0, 0, "sample");
+    //SpriteManager test(100, 100, "test");
     // run the program as long as the window is open
     while (window.isOpen())
     {

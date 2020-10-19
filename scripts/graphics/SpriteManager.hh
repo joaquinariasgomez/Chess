@@ -3,7 +3,7 @@
 
 class SpriteManager {
     public:
-        SpriteManager(int posX, int posY, std::string textureName);
+        SpriteManager(int posX, int posY, int dimension, std::string textureName);
         sf::Sprite getSprite() const;
     private:
         int posX;
