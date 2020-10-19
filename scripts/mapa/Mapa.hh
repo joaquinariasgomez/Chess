@@ -10,7 +10,7 @@ class Mapa {
         Mapa(int dimension);
         const int getDimension() const {return dimension_;}
         const Celda* getCelda(int x, int y) {return celdas[{x,y}];}
-        void draw(sf::RenderWindow& window) const {window.draw(sprite->getSprite());}
+        void draw(sf::RenderWindow& window) const;
 
         std::map<std::pair<int, int>, const Celda*> celdas;
     private:

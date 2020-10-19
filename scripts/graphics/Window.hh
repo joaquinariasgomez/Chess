@@ -2,6 +2,9 @@
 
 class Window {
     public:
-        static const int getWindowWidth() {return 540;}
-        static const int getWindowHeight() {return 540;}
+        static const int getWindowWidth() {return WINDOW_WIDTH;}
+        static const int getWindowHeight() {return WINDOW_HEIGHT;}
+    private:
+        static const int WINDOW_WIDTH = 1080;
+        static const int WINDOW_HEIGHT = 1080;
 };
