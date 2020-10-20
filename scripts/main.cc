@@ -1,21 +1,24 @@
 #include <iostream>
 #include "mapa/Mapa.hh"
-#include "Accion.hh"
-#include <thread>         // std::this_thread::sleep_for
-#include <chrono>         // std::chrono::seconds
-#include <ctime>
 #include <SFML/Graphics.hpp>
 #include "graphics/SpriteManager.hh"
 #include "graphics/Window.hh"
+#include "entities/Player.hh"
 
 const int DIM = 6;
 int Mapa::dimension{DIM};
 
+void draw(sf::RenderWindow& window, Mapa& mapa, Player& player) {
+    mapa.draw(window);
+    player.draw(window);
+}
+
 int main() {
     // create the window
-    sf::RenderWindow window(sf::VideoMode(Window::getWindowWidth(), Window::getWindowHeight()), "My game kappa");
+    sf::RenderWindow window(sf::VideoMode(Window::getWindowWidth(), Window::getWindowHeight()), "My game kappa", sf::Style::Close);
 
     Mapa mapa;
+    Player player;
     // run the program as long as the window is open
     while (window.isOpen())
     {
@@ -26,13 +29,16 @@ int main() {
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (event.type == sf::Event::EventType::KeyPressed){
+                player.evaluate(event, mapa);
+            }
         }
 
         // clear the window with black color
         window.clear(sf::Color::White);
 
         // draw everything here...
-        mapa.draw(window);
+        draw(window, mapa, player);
 
         // end the current frame
         window.display();

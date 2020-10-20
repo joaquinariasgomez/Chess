@@ -3,7 +3,7 @@
 #include "../mapa/Mapa.hh"
 #include "Window.hh"
 
-SpriteManager::SpriteManager(int posX, int posY, std::string textureName): posX(posX), posY(posY) {
+SpriteManager::SpriteManager(int fila, int columna, std::string textureName): fila(fila), columna(columna) {
     texture = TextureLoader::getTexture(textureName);
     sprite.setTexture(texture);
 
@@ -19,9 +19,15 @@ SpriteManager::SpriteManager(int posX, int posY, std::string textureName): posX(
     else {
         float spriteWidth = (float)Window::getWindowWidth() / (float)Mapa::dimension;
         float spriteHeight = (float)Window::getWindowHeight() / (float)Mapa::dimension;
-        sprite.setPosition(sf::Vector2f(posY * spriteHeight, posX * spriteWidth));
+        sprite.setPosition(sf::Vector2f(columna * spriteHeight, fila * spriteWidth));
         sprite.setScale(sf::Vector2f(spriteWidth / (float)textureWidth, spriteHeight / (float)textureHeight));
     }
+}
+
+void SpriteManager::updatePosition(int fila, int columna) {
+    float spriteWidth = (float)Window::getWindowWidth() / (float)Mapa::dimension;
+    float spriteHeight = (float)Window::getWindowHeight() / (float)Mapa::dimension;
+    sprite.setPosition(sf::Vector2f(columna * spriteHeight, fila * spriteWidth));
 }
 
 sf::Sprite SpriteManager::getSprite() const {

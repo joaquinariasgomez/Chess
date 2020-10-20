@@ -3,11 +3,12 @@
 
 class SpriteManager {
     public:
-        SpriteManager(int posX, int posY, std::string textureName);
+        SpriteManager(int fila, int columna, std::string textureName);
         sf::Sprite getSprite() const;
+        void updatePosition(int fila, int columna);
     private:
-        int posX;
-        int posY;
+        int fila;
+        int columna;
         sf::Sprite sprite;
         sf::Texture texture;
 };

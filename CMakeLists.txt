@@ -13,6 +13,8 @@ file(GLOB SOURCES
     "scripts/mapa/*.cc"
     "scripts/mapa/items/*.hh"
     "scripts/mapa/items/*.cc"
+    "scripts/entities/*.hh"
+    "scripts/entities/*.cc"
     "scripts/graphics/*.hh"
     "scripts/graphics/*.cc"
 )

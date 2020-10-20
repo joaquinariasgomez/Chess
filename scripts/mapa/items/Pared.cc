@@ -1,6 +1,6 @@
 #include "Pared.hh"
 
-Pared::Pared(int fila, int columna): Item(fila, columna, "pared") {
+Pared::Pared(int fila, int columna): Item(fila, columna, "pared", 1) {
 
 }
 

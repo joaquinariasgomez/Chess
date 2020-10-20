@@ -8,7 +8,7 @@ class Celda {
     public:
         Celda(int fila, int columna, int itemValor);
         void draw(sf::RenderWindow& window) const;
-        const Item* getItem() const {return item;}
+        Item* getItem() const {return item;}
     private:
         int fila_;
         int columna_;
