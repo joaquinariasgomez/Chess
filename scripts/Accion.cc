@@ -1,16 +1,16 @@
 #include "Accion.hh"
 #include "mapa/EstadoInicial.hh"
 
-Accion::Accion(std::string movimiento) {
+/*Accion::Accion(std::string movimiento) {
     //Adivinar celda y direccion desde movimiento
     char mov_array[movimiento.length() + 1];
     std::strcpy(mov_array, movimiento.c_str());
     celdaX = mov_array[0] - '0' - 1;
     celdaY = mov_array[1] - '0' - 1;
     direccion = mov_array[2];
-}
+}*/
 
-int Accion::move(Mapa& t) const {
+/*int Accion::move(Mapa& t) const {
     int error = 0;
     //Comprobar que celda existe y que tiene una ficha en ella
     if(celdaX < 0 || celdaY < 0 || celdaX >= t.getDimension() || celdaY >= t.getDimension()) return -1;
@@ -51,4 +51,4 @@ int Accion::move(Mapa& t) const {
     }
     else {error = -1;}
     return error;
-}
+}*/

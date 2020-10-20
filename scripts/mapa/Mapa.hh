@@ -7,13 +7,12 @@
 
 class Mapa {
     public:
-        Mapa(int dimension);
-        const int getDimension() const {return dimension_;}
+        Mapa();
         const Celda* getCelda(int x, int y) {return celdas[{x,y}];}
         void draw(sf::RenderWindow& window) const;
 
         std::map<std::pair<int, int>, const Celda*> celdas;
-    private:
-        int dimension_;
+        static int dimension;
+    private:   
         SpriteManager* sprite;  //background sprite
 };

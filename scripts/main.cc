@@ -8,11 +8,12 @@
 #include "graphics/SpriteManager.hh"
 #include "graphics/Window.hh"
 
+const int DIM = 6;
+int Mapa::dimension{DIM};
+
 int main() {
     // create the window
-    const int DIM = 6;
-
-    Mapa mapa(DIM);
+    Mapa mapa;
     sf::RenderWindow window(sf::VideoMode(Window::getWindowWidth(), Window::getWindowHeight()), "My game kappa");
 
     //SpriteManager sample(0, 0, "sample");

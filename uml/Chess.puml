@@ -1,7 +1,15 @@
-@startuml
+@startuml Mapa
+
+class Jugador {
+    +void draw(window)
+    -SpriteManager sprite
+}
 
 class Mapa {
-    -SpriteManager background
+    +void draw(window)
+    +static int getDimension()
+    -static int dimension
+    -SpriteManager sprite
 }
 
 class Accion {
@@ -10,21 +18,25 @@ class Accion {
 }
 
 class Celda {
+    +void draw(window)
     -int fila
     -int columna
+    -SpriteManager sprite
 }
 
-class Elemento {
-    
+class Item {
+    +void draw(window)
+    -SpriteManager sprite
 }
 
 Jugador --> Accion
 Accion --> Mapa
+main --> Mapa
 
-Mapa *--> "8x8" Celda
-Celda o--> "0..1" Elemento
-Elemento <|-- Pared
-Elemento <|-- Agujero
+Mapa *--> "6x6" Celda
+Celda o--> "0..n" Item
+Item <|-- Pared
+Item <|-- Bola
 
 Mapa --> EstadoInicial
 Estado <|-- EstadoInicial

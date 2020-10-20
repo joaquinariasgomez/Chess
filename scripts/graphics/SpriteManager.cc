@@ -1,8 +1,9 @@
 #include "SpriteManager.hh"
 #include "TextureLoader.hh"
+#include "../mapa/Mapa.hh"
 #include "Window.hh"
 
-SpriteManager::SpriteManager(int posX, int posY, int dimension, std::string textureName): posX(posX), posY(posY) {
+SpriteManager::SpriteManager(int posX, int posY, std::string textureName): posX(posX), posY(posY) {
     texture = TextureLoader::getTexture(textureName);
     sprite.setTexture(texture);
 
@@ -16,8 +17,8 @@ SpriteManager::SpriteManager(int posX, int posY, int dimension, std::string text
         sprite.setScale(sf::Vector2f((float)Window::getWindowWidth()/(float)textureWidth, (float)Window::getWindowHeight()/(float)textureHeight));
     }
     else {
-        float spriteWidth = (float)Window::getWindowWidth() / (float)dimension;
-        float spriteHeight = (float)Window::getWindowHeight() / (float)dimension;
+        float spriteWidth = (float)Window::getWindowWidth() / (float)Mapa::dimension;
+        float spriteHeight = (float)Window::getWindowHeight() / (float)Mapa::dimension;
         sprite.setPosition(sf::Vector2f(posX * spriteWidth, posY * spriteHeight));
         sprite.setScale(sf::Vector2f(spriteWidth / (float)textureWidth, spriteHeight / (float)textureHeight));
     }
