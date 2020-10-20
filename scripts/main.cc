@@ -13,11 +13,9 @@ int Mapa::dimension{DIM};
 
 int main() {
     // create the window
-    Mapa mapa;
     sf::RenderWindow window(sf::VideoMode(Window::getWindowWidth(), Window::getWindowHeight()), "My game kappa");
 
-    //SpriteManager sample(0, 0, "sample");
-    //SpriteManager test(100, 100, "test");
+    Mapa mapa;
     // run the program as long as the window is open
     while (window.isOpen())
     {

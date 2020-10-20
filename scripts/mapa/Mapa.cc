@@ -13,7 +13,7 @@ void Mapa::draw(sf::RenderWindow& window) const {
     // First render background
     window.draw(sprite->getSprite());   //Sprite background
     // Render cells
-    for(auto const& [_, celda] : celdas) {
+    for(auto const& [coords, celda] : celdas) {
         celda->draw(window);
     }
 }

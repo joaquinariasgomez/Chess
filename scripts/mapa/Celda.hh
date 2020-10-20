@@ -1,18 +1,17 @@
 #pragma once
 #include <iostream>
-#include "FichaO.hh"
-#include "FichaX.hh"
+#include "items/Item.hh"
 #include "../graphics/SpriteManager.hh"
 #include <SFML/Graphics.hpp>
 
 class Celda {
     public:
-        Celda(int fila, int columna, int fichaValor);
+        Celda(int fila, int columna, int itemValor);
         void draw(sf::RenderWindow& window) const;
-        const Ficha* getFicha() const {return ficha;}
+        const Item* getItem() const {return item;}
     private:
         int fila_;
         int columna_;
-        Ficha* ficha;
+        Item* item;
         SpriteManager* sprite;
 };

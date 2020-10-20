@@ -19,11 +19,9 @@ SpriteManager::SpriteManager(int posX, int posY, std::string textureName): posX(
     else {
         float spriteWidth = (float)Window::getWindowWidth() / (float)Mapa::dimension;
         float spriteHeight = (float)Window::getWindowHeight() / (float)Mapa::dimension;
-        sprite.setPosition(sf::Vector2f(posX * spriteWidth, posY * spriteHeight));
+        sprite.setPosition(sf::Vector2f(posY * spriteHeight, posX * spriteWidth));
         sprite.setScale(sf::Vector2f(spriteWidth / (float)textureWidth, spriteHeight / (float)textureHeight));
     }
-
-    //sprite.setScale(sf::Vector2f(10.f, 10.f));
 }
 
 sf::Sprite SpriteManager::getSprite() const {
