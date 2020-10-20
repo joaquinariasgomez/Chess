@@ -11,7 +11,7 @@ class Mapa {
         const Celda* getCelda(int x, int y) {return celdas[{x,y}];}
         void draw(sf::RenderWindow& window) const;
 
-        std::map<std::pair<int, int>, const Celda*> celdas;
+        std::map<std::pair<int, int>, Celda*> celdas;
         static int dimension;
     private:   
         SpriteManager* sprite;  //background sprite

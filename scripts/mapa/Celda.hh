@@ -9,6 +9,7 @@ class Celda {
         Celda(int fila, int columna, int itemValor);
         void draw(sf::RenderWindow& window) const;
         Item* getItem() const {return item;}
+        void setItem(Item* item2) {item=item2;}
     private:
         int fila_;
         int columna_;

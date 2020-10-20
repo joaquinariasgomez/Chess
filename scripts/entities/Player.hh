@@ -14,7 +14,7 @@ class Player {
         void moveRight(Mapa& mapa);
         void moveLeft(Mapa& mapa);
         void updateSpritePosition();
-        void checkItem(Item* objItem, int desiredFila, int desiredColumna);
+        void checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredColumna);
         int fila;
         int columna;
         SpriteManager* sprite;  //background sprite

@@ -49,17 +49,17 @@ std::string guessDirection(int currFila, int currCol, int objFila, int objCol) {
     return "";
 }
 
-void Player::checkItem(Item* objItem, int desiredFila, int desiredColumna) {
+void Player::checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredColumna) {
     std::string direction = guessDirection(fila, columna, desiredFila, desiredColumna);
     // Examinar item
     switch(objItem->id) {
         case 1: // Pared
             break;
         case 2: // Roca
-            if(dynamic_cast<Roca*>(objItem)->move(direction) != -1) {    // Returns -1 if it cannot move the rock
-                fila = desiredFila;
+            if(dynamic_cast<Roca*>(objItem)->move(mapa, direction) != -1) {    // Returns -1 if it cannot move the rock
+                /*fila = desiredFila;
                 columna = desiredColumna;
-                updateSpritePosition();
+                updateSpritePosition();*/
             }
             break;
         default: break;
@@ -74,7 +74,7 @@ void Player::moveRight(Mapa& mapa) {
         // Mover con normalidad
         columna++;
         updateSpritePosition();
-    } else checkItem(objItem, fila, columna + 1);
+    } else checkItem(mapa, objItem, fila, columna + 1);
 }
 
 void Player::moveUp(Mapa& mapa) {
@@ -85,7 +85,7 @@ void Player::moveUp(Mapa& mapa) {
         // Mover con normalidad
         fila--;
         updateSpritePosition();
-    } else checkItem(objItem, fila - 1, columna);
+    } else checkItem(mapa, objItem, fila - 1, columna);
 }
 
 void Player::moveDown(Mapa& mapa) {
@@ -96,7 +96,7 @@ void Player::moveDown(Mapa& mapa) {
         // Mover con normalidad
         fila++;
         updateSpritePosition();
-    } else checkItem(objItem, fila + 1, columna);
+    } else checkItem(mapa, objItem, fila + 1, columna);
 }
 
 void Player::moveLeft(Mapa& mapa) {
@@ -107,5 +107,5 @@ void Player::moveLeft(Mapa& mapa) {
         // Mover con normalidad
         columna--;
         updateSpritePosition();
-    } else checkItem(objItem, fila, columna - 1);
+    } else checkItem(mapa, objItem, fila, columna - 1);
 }
