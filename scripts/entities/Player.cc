@@ -20,7 +20,7 @@ Player::Player(): vida(100) {
 }
 
 void Player::draw(sf::RenderWindow& window) const {
-    window.draw(sprite->getSprite());
+    window.draw(sprite->getSprite());   // Player sprite
 }
 
 void Player::hurt(int damage) {

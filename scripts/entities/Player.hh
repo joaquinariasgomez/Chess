@@ -9,6 +9,7 @@ class Player {
         void draw(sf::RenderWindow& window) const;
         void evaluateEvent(sf::Event event, Mapa& mapa);
         void hurt(int damage);
+        int getVida() const {return vida;}
     private:
         void moveUp(Mapa& mapa);
         void moveDown(Mapa& mapa);
@@ -18,6 +19,6 @@ class Player {
         void checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredColumna);
         int fila;
         int columna;
-        SpriteManager* sprite;  //background sprite
+        SpriteManager* sprite;  //player sprite
         float vida;
 };

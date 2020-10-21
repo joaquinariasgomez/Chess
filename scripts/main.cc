@@ -15,7 +15,7 @@ void draw(sf::RenderWindow& window, Mapa& mapa, Player& player) {
 
 int main() {
     // create the window
-    sf::RenderWindow window(sf::VideoMode(Window::getMapWidth(), Window::getMapHeight()), "My game kappa", sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(Window::getMapWidth(), Window::getMapHeight() + Window::getBarHeight()), "My game kappa", sf::Style::Close);
 
     Mapa mapa;
     Player player;

@@ -10,5 +10,5 @@ class Window {
         static const int MAP_WIDTH = 1080;
         static const int MAP_HEIGHT = 1080;
         static const int BAR_WIDTH = 1080;
-        static const int BAR_HEIGHT = 270;
+        static const int BAR_HEIGHT = 135;
 };
