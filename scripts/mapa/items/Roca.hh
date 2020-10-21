@@ -15,5 +15,6 @@ class Roca: public Item {
         int moveDown(Mapa& mapa);
         void updateSpritePosition();
         int checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredColumna);
+        void updateTexture(std::string direction);
         std::pair<int,int> spriteState;    // Display a different texture depending on this internal state
 };

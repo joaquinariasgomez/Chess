@@ -3,6 +3,7 @@
 #include "items/Pared.hh"
 #include "items/Agujero.hh"
 #include "items/AgujeroRelleno.hh"
+#include "items/Pincho.hh"
 
 Celda::Celda(int fila, int columna, int itemValor): fila_(fila), columna_(columna), sprite(new SpriteManager(fila, columna, "celda")) {
     switch(itemValor) {
@@ -10,6 +11,9 @@ Celda::Celda(int fila, int columna, int itemValor): fila_(fila), columna_(column
         case 2: items.push_back(new Roca(fila, columna)); break;
         case 3: items.push_back(new Agujero(fila, columna)); break;
         case 4: items.push_back(new AgujeroRelleno(fila, columna)); break;
+        case 6: items.push_back(new Pincho(fila, columna, 1)); break;
+        case 7: items.push_back(new Pincho(fila, columna, 2)); break;
+        case 8: items.push_back(new Pincho(fila, columna, 3)); break;
         case -1:
         default: items.push_back(NULL);
     }

@@ -1,6 +1,6 @@
 #include "Agujero.hh"
 
-Agujero::Agujero(int fila, int columna): Item(fila, columna, "test", 3) {
+Agujero::Agujero(int fila, int columna): Item(fila, columna, "agujero", 3) {
 
 }
 

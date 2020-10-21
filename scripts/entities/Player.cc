@@ -2,8 +2,9 @@
 #include "../mapa/EstadoInicial.hh"
 #include "../mapa/items/Roca.hh"
 #include "../mapa/items/Pared.hh"
+#include "../mapa/items/Pincho.hh"
 
-Player::Player() {
+Player::Player(): vida(100) {
     int coordX, coordY; // If not found, coords of player are 0,0
     for(int i=0; i<Mapa::dimension; ++i) {
         for(int j=0; j<Mapa::dimension; ++j) {
@@ -22,7 +23,12 @@ void Player::draw(sf::RenderWindow& window) const {
     window.draw(sprite->getSprite());
 }
 
-void Player::evaluate(sf::Event event, Mapa& mapa) {
+void Player::hurt(int damage) {
+    vida -= damage;
+    std::cout << "OUCH" << std::endl;
+}
+
+void Player::evaluateEvent(sf::Event event, Mapa& mapa) {
     if (event.key.code == sf::Keyboard::Left){
         moveLeft(mapa);
     }
@@ -69,6 +75,11 @@ void Player::checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredCo
             columna = desiredColumna;
             updateSpritePosition();
             break;
+        case 6: // Pincho1
+            fila = desiredFila;
+            columna = desiredColumna;
+            updateSpritePosition();
+            dynamic_cast<Pincho*>(objItem)->hurt(*this);
         default: break;
     }
 }

@@ -6,6 +6,7 @@ class SpriteManager {
         SpriteManager(int fila, int columna, std::string textureName);
         sf::Sprite getSprite() const;
         void updatePosition(int fila, int columna);
+        void updateTexture(std::string textureName);
     private:
         int fila;
         int columna;

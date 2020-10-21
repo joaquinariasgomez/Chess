@@ -9,20 +9,43 @@ void Roca::draw(sf::RenderWindow& window) const {
     window.draw(sprite->getSprite());
 }
 
-int Roca::move(Mapa& mapa, std::string direction) {
-    if(direction == "left") {
-        return moveLeft(mapa);
-    }
+void Roca::updateTexture(std::string direction) {
     if(direction == "right") {
-        return moveRight(mapa);
+        (spriteState.second < 2) ? spriteState.second++ : spriteState.second = 0;
+        if(spriteState.first != 1) spriteState.first = 1;
+    }
+    if(direction == "left") {
+        (spriteState.second > 0) ? spriteState.second-- : spriteState.second = 2;
+        if(spriteState.first != 1) spriteState.first = 1;
     }
     if(direction == "up") {
-        return moveUp(mapa);
+        (spriteState.first > 0) ? spriteState.first-- : spriteState.first = 2;
+        if(spriteState.second != 1) spriteState.second = 1;
     }
     if(direction == "down") {
-        return moveDown(mapa);
+        (spriteState.first < 2) ? spriteState.first++ : spriteState.first = 0;
+        if(spriteState.second != 1) spriteState.second = 1;
     }
-    return -1;  // Cannot move
+    sprite->updateTexture("roca"+std::to_string(spriteState.first)+std::to_string(spriteState.second));
+}
+
+int Roca::move(Mapa& mapa, std::string direction) {
+    int result = -1;
+    if(direction == "left") {
+        result = moveLeft(mapa);
+    }
+    if(direction == "right") {
+        result = moveRight(mapa);
+    }
+    if(direction == "up") {
+        result = moveUp(mapa);
+    }
+    if(direction == "down") {
+        result = moveDown(mapa);
+    }
+    // Update texture depending on direction
+    if(result != -1) updateTexture(direction);
+    return result;  // Cannot move
 }
 
 int Roca::checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredColumna) {

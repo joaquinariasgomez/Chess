@@ -7,7 +7,8 @@ class Player {
     public:
         Player();
         void draw(sf::RenderWindow& window) const;
-        void evaluate(sf::Event event, Mapa& mapa);
+        void evaluateEvent(sf::Event event, Mapa& mapa);
+        void hurt(int damage);
     private:
         void moveUp(Mapa& mapa);
         void moveDown(Mapa& mapa);
@@ -18,4 +19,5 @@ class Player {
         int fila;
         int columna;
         SpriteManager* sprite;  //background sprite
+        float vida;
 };

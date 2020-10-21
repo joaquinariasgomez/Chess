@@ -15,7 +15,7 @@ void draw(sf::RenderWindow& window, Mapa& mapa, Player& player) {
 
 int main() {
     // create the window
-    sf::RenderWindow window(sf::VideoMode(Window::getWindowWidth(), Window::getWindowHeight()), "My game kappa", sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(Window::getMapWidth(), Window::getMapHeight()), "My game kappa", sf::Style::Close);
 
     Mapa mapa;
     Player player;
@@ -30,7 +30,7 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
             if (event.type == sf::Event::EventType::KeyPressed){
-                player.evaluate(event, mapa);
+                player.evaluateEvent(event, mapa);
             }
         }
 
