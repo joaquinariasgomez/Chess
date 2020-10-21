@@ -1,3 +1,4 @@
+#pragma once
 #include "Item.hh"
 #include "../Mapa.hh"
 #include <string>

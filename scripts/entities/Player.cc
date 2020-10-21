@@ -62,6 +62,13 @@ void Player::checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredCo
                 updateSpritePosition();
             }
             break;
+        case 3: // Agujero
+            break;
+        case 4: // Agujero relleno
+            fila = desiredFila;
+            columna = desiredColumna;
+            updateSpritePosition();
+            break;
         default: break;
     }
 }

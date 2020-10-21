@@ -1,8 +1,8 @@
 #pragma once
 #include "Item.hh"
 
-class Pared: public Item {
+class AgujeroRelleno: public Item {
     public:
-        Pared(int fila, int columna);
+        AgujeroRelleno(int fila, int columna);
         void draw(sf::RenderWindow& window) const;
 };
