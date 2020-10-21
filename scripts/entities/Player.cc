@@ -57,9 +57,9 @@ void Player::checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredCo
             break;
         case 2: // Roca
             if(dynamic_cast<Roca*>(objItem)->move(mapa, direction) != -1) {    // Returns -1 if it cannot move the rock
-                /*fila = desiredFila;
+                fila = desiredFila;
                 columna = desiredColumna;
-                updateSpritePosition();*/
+                updateSpritePosition();
             }
             break;
         default: break;

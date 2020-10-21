@@ -27,7 +27,13 @@ class Celda {
 
 class Item {
     +void draw(window)
+    -int fila
+    -int columna
     -SpriteManager sprite
+}
+
+class Roca {
+    +void move()
 }
 
 Player --> EstadoInicial
@@ -38,7 +44,7 @@ main --> Player
 Mapa *--> "6x6" Celda
 Celda o--> "0..n" Item
 Item <|-- Pared
-Item <|-- Bola
+Item <|-- Roca
 
 Mapa --> EstadoInicial
 Estado <|-- EstadoInicial

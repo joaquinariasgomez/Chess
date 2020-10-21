@@ -13,6 +13,6 @@ class Roca: public Item {
         int moveUp(Mapa& mapa);
         int moveDown(Mapa& mapa);
         void updateSpritePosition();
-        int fila;
-        int columna;
+        int checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredColumna);
+        int spriteState;    // Display a different texture depending on this internal state
 };

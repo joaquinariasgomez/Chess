@@ -1,6 +1,6 @@
 #include "Roca.hh"
 
-Roca::Roca(int fila, int columna): Item(fila, columna, "roca", 2), fila(fila), columna(columna) {
+Roca::Roca(int fila, int columna): Item(fila, columna, "roca", 2), spriteState(0) {
 
 }
 
@@ -24,27 +24,74 @@ int Roca::move(Mapa& mapa, std::string direction) {
     return -1;  // Cannot move
 }
 
+int Roca::checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredColumna) {
+    // Examinar item
+    switch(objItem->id) {
+        case 1: // Pared
+            return -1;
+        case 2: // Roca
+            return -1;
+        default: return -1;
+    }
+    return 0;
+}
+
 void Roca::updateSpritePosition() {
     sprite->updatePosition(fila, columna);
 }
 
 int Roca::moveLeft(Mapa& mapa) {
-    return -1;
+    if(columna == 0) return -1;
+    // Check wich item is in fila, columna - 1
+    Item* objItem = mapa.celdas[{fila, columna - 1}]->getItem();
+    if(objItem == NULL) {
+        // Mover con normalidad
+        mapa.celdas[{fila, columna - 1}]->setItem(this);
+        mapa.celdas[{fila, columna}]->setItem(NULL);
+        columna--;
+        updateSpritePosition();
+    } else return checkItem(mapa, objItem, fila, columna - 1);
+    return 0;
 }
 
 int Roca::moveRight(Mapa& mapa) {
-    // Mover con normalidad
-    mapa.celdas[{fila, columna+1}]->setItem(this);
-    mapa.celdas[{fila, columna}]->setItem(NULL);
-    //columna++;
-    //updateSpritePosition();
+    if(columna == (Mapa::dimension - 1)) return -1;
+    // Check wich item is in fila, columna + 1
+    Item* objItem = mapa.celdas[{fila, columna + 1}]->getItem();
+    if(objItem == NULL) {
+        // Mover con normalidad
+        mapa.celdas[{fila, columna + 1}]->setItem(this);
+        mapa.celdas[{fila, columna}]->setItem(NULL);
+        columna++;
+        updateSpritePosition();
+    } else return checkItem(mapa, objItem, fila, columna + 1);
     return 0;
 }
 
 int Roca::moveUp(Mapa& mapa) {
-    return -1;
+    if(fila == 0) return -1;
+    // Check wich item is in fila - 1, columna
+    Item* objItem = mapa.celdas[{fila - 1, columna}]->getItem();
+    if(objItem == NULL) {
+        // Mover con normalidad
+        mapa.celdas[{fila - 1, columna}]->setItem(this);
+        mapa.celdas[{fila, columna}]->setItem(NULL);
+        fila--;
+        updateSpritePosition();
+    } else return checkItem(mapa, objItem, fila - 1, columna);
+    return 0;
 }
 
 int Roca::moveDown(Mapa& mapa) {
-    return -1;
+    if(fila == (Mapa::dimension - 1)) return -1;
+    // Check wich item is in fila + 1, columna
+    Item* objItem = mapa.celdas[{fila + 1, columna}]->getItem();
+    if(objItem == NULL) {
+        // Mover con normalidad
+        mapa.celdas[{fila + 1, columna}]->setItem(this);
+        mapa.celdas[{fila, columna}]->setItem(NULL);
+        fila++;
+        updateSpritePosition();
+    } else return checkItem(mapa, objItem, fila + 1, columna);
+    return 0;
 }

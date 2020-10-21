@@ -8,7 +8,6 @@
 class Mapa {
     public:
         Mapa();
-        const Celda* getCelda(int x, int y) {return celdas[{x,y}];}
         void draw(sf::RenderWindow& window) const;
 
         std::map<std::pair<int, int>, Celda*> celdas;
