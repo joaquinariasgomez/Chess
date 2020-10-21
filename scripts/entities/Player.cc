@@ -76,7 +76,7 @@ void Player::checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredCo
 void Player::moveRight(Mapa& mapa) {
     if(columna == (Mapa::dimension - 1)) return;
     // Check which item is in fila, columna + 1
-    Item* objItem = mapa.celdas[{fila, columna + 1}]->getItem();
+    Item* objItem = mapa.celdas[{fila, columna + 1}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
         columna++;
@@ -87,7 +87,7 @@ void Player::moveRight(Mapa& mapa) {
 void Player::moveUp(Mapa& mapa) {
     if(fila == 0) return;
     // Check which item is in fila - 1, columna
-    Item* objItem = mapa.celdas[{fila - 1, columna}]->getItem();
+    Item* objItem = mapa.celdas[{fila - 1, columna}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
         fila--;
@@ -98,7 +98,7 @@ void Player::moveUp(Mapa& mapa) {
 void Player::moveDown(Mapa& mapa) {
     if(fila == (Mapa::dimension - 1)) return;
     // Check which item is in fila + 1, columna
-    Item* objItem = mapa.celdas[{fila + 1, columna}]->getItem();
+    Item* objItem = mapa.celdas[{fila + 1, columna}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
         fila++;
@@ -109,7 +109,7 @@ void Player::moveDown(Mapa& mapa) {
 void Player::moveLeft(Mapa& mapa) {
     if(columna == 0) return;
     // Check which item is in fila, columna - 1
-    Item* objItem = mapa.celdas[{fila, columna - 1}]->getItem();
+    Item* objItem = mapa.celdas[{fila, columna - 1}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
         columna--;

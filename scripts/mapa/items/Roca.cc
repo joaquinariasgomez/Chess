@@ -1,7 +1,7 @@
 #include "Roca.hh"
 #include "AgujeroRelleno.hh"
 
-Roca::Roca(int fila, int columna): Item(fila, columna, "roca", 2), spriteState(0) {
+Roca::Roca(int fila, int columna): Item(fila, columna, "roca11", 2), spriteState({1,1}) {
 
 }
 
@@ -33,12 +33,12 @@ int Roca::checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredColum
         case 2: // Roca
             return -1;
         case 3: // Agujero
-            mapa.celdas[{desiredFila, desiredColumna}]->setItem(new AgujeroRelleno(desiredFila, desiredColumna));
-            mapa.celdas[{fila, columna}]->setItem(NULL);
+            mapa.celdas[{desiredFila, desiredColumna}]->pushItem(new AgujeroRelleno(desiredFila, desiredColumna));
+            mapa.celdas[{fila, columna}]->removeItem(this);
             return 0;
         case 4: // Agujero relleno
-            mapa.celdas[{desiredFila, desiredColumna}]->setItem(this);
-            mapa.celdas[{fila, columna}]->setItem(NULL);
+            mapa.celdas[{desiredFila, desiredColumna}]->pushItem(this);
+            mapa.celdas[{fila, columna}]->removeItem(this);
             fila = desiredFila;
             columna = desiredColumna;
             updateSpritePosition();
@@ -55,11 +55,11 @@ void Roca::updateSpritePosition() {
 int Roca::moveLeft(Mapa& mapa) {
     if(columna == 0) return -1;
     // Check wich item is in fila, columna - 1
-    Item* objItem = mapa.celdas[{fila, columna - 1}]->getItem();
+    Item* objItem = mapa.celdas[{fila, columna - 1}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
-        mapa.celdas[{fila, columna - 1}]->setItem(this);
-        mapa.celdas[{fila, columna}]->setItem(NULL); //TODO: QUITAR DE LISTA DE ITEMS ESTE ITEM, EN VEZ DE SETTEAR A NULL
+        mapa.celdas[{fila, columna - 1}]->pushItem(this);
+        mapa.celdas[{fila, columna}]->removeItem(this);
         columna--;
         updateSpritePosition();
     } else return checkItem(mapa, objItem, fila, columna - 1);
@@ -69,11 +69,11 @@ int Roca::moveLeft(Mapa& mapa) {
 int Roca::moveRight(Mapa& mapa) {
     if(columna == (Mapa::dimension - 1)) return -1;
     // Check wich item is in fila, columna + 1
-    Item* objItem = mapa.celdas[{fila, columna + 1}]->getItem();
+    Item* objItem = mapa.celdas[{fila, columna + 1}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
-        mapa.celdas[{fila, columna + 1}]->setItem(this);
-        mapa.celdas[{fila, columna}]->setItem(NULL); //TODO: QUITAR DE LISTA DE ITEMS ESTE ITEM, EN VEZ DE SETTEAR A NULL
+        mapa.celdas[{fila, columna + 1}]->pushItem(this);
+        mapa.celdas[{fila, columna}]->removeItem(this);
         columna++;
         updateSpritePosition();
     } else return checkItem(mapa, objItem, fila, columna + 1);
@@ -83,11 +83,11 @@ int Roca::moveRight(Mapa& mapa) {
 int Roca::moveUp(Mapa& mapa) {
     if(fila == 0) return -1;
     // Check wich item is in fila - 1, columna
-    Item* objItem = mapa.celdas[{fila - 1, columna}]->getItem();
+    Item* objItem = mapa.celdas[{fila - 1, columna}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
-        mapa.celdas[{fila - 1, columna}]->setItem(this);
-        mapa.celdas[{fila, columna}]->setItem(NULL); //TODO: QUITAR DE LISTA DE ITEMS ESTE ITEM, EN VEZ DE SETTEAR A NULL
+        mapa.celdas[{fila - 1, columna}]->pushItem(this);
+        mapa.celdas[{fila, columna}]->removeItem(this);
         fila--;
         updateSpritePosition();
     } else return checkItem(mapa, objItem, fila - 1, columna);
@@ -97,11 +97,11 @@ int Roca::moveUp(Mapa& mapa) {
 int Roca::moveDown(Mapa& mapa) {
     if(fila == (Mapa::dimension - 1)) return -1;
     // Check wich item is in fila + 1, columna
-    Item* objItem = mapa.celdas[{fila + 1, columna}]->getItem();
+    Item* objItem = mapa.celdas[{fila + 1, columna}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
-        mapa.celdas[{fila + 1, columna}]->setItem(this);
-        mapa.celdas[{fila, columna}]->setItem(NULL); //TODO: QUITAR DE LISTA DE ITEMS ESTE ITEM, EN VEZ DE SETTEAR A NULL
+        mapa.celdas[{fila + 1, columna}]->pushItem(this);
+        mapa.celdas[{fila, columna}]->removeItem(this);
         fila++;
         updateSpritePosition();
     } else return checkItem(mapa, objItem, fila + 1, columna);
