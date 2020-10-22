@@ -1,14 +1,18 @@
 #include <iostream>
 #include "mapa/Mapa.hh"
+#include "mapa/StatusBar.hh"
 #include <SFML/Graphics.hpp>
 #include "graphics/SpriteManager.hh"
 #include "graphics/Window.hh"
 #include "entities/Player.hh"
 
 const int DIM = 6;
+const float MAX_VIDA = 100;
+float Player::maxVida{MAX_VIDA};
 int Mapa::dimension{DIM};
 
-void draw(sf::RenderWindow& window, Mapa& mapa, Player& player) {
+void draw(sf::RenderWindow& window, Mapa& mapa, StatusBar& statusBar, Player& player) {
+    statusBar.draw(window);
     mapa.draw(window);
     player.draw(window);
 }
@@ -17,8 +21,9 @@ int main() {
     // create the window
     sf::RenderWindow window(sf::VideoMode(Window::getMapWidth(), Window::getMapHeight() + Window::getBarHeight()), "My game kappa", sf::Style::Close);
 
+    StatusBar statusBar;
     Mapa mapa;
-    Player player;
+    Player player(&statusBar);
     // run the program as long as the window is open
     while (window.isOpen())
     {
@@ -38,7 +43,7 @@ int main() {
         window.clear(sf::Color::White);
 
         // draw everything here...
-        draw(window, mapa, player);
+        draw(window, mapa, statusBar, player);
 
         // end the current frame
         window.display();

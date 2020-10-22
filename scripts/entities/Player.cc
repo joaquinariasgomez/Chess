@@ -4,7 +4,7 @@
 #include "../mapa/items/Pared.hh"
 #include "../mapa/items/Pincho.hh"
 
-Player::Player(): vida(100) {
+Player::Player(StatusBar* statusBar): vida(100), statusBar(statusBar) {
     int coordX, coordY; // If not found, coords of player are 0,0
     for(int i=0; i<Mapa::dimension; ++i) {
         for(int j=0; j<Mapa::dimension; ++j) {
@@ -25,7 +25,7 @@ void Player::draw(sf::RenderWindow& window) const {
 
 void Player::hurt(int damage) {
     vida -= damage;
-    std::cout << "OUCH" << std::endl;
+    statusBar->updateLife(vida);
 }
 
 void Player::evaluateEvent(sf::Event event, Mapa& mapa) {

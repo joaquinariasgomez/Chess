@@ -1,9 +1,12 @@
 #include "StatusBar.hh"
 
-StatusBar::StatusBar(): sprite(new SpriteManager(fila, columna, "statusBar")) {
+StatusBar::StatusBar(): background(new SpriteManager("statusBarBackground")), life(new SpriteManager("life")) {
 
 }
 
 void StatusBar::draw(sf::RenderWindow& window) const {
-    window.draw(sprite->getSprite());
+    // First draw background
+    window.draw(background->getSprite());
+    // Draw life sprites
+    window.draw(life->getSprite());
 }

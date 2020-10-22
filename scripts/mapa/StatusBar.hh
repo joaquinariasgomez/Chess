@@ -6,6 +6,8 @@ class StatusBar {
     public:
         StatusBar();
         void draw(sf::RenderWindow& window) const;
+        void updateLife(float newLife) {life->updateLife(newLife);}
     private:
-        SpriteManager* sprite;
+        SpriteManager* background;
+        SpriteManager* life;
 };
