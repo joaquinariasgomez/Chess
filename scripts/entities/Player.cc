@@ -25,6 +25,10 @@ void Player::draw(sf::RenderWindow& window) const {
 
 void Player::hurt(int damage) {
     vida -= damage;
+    if(vida < 0) {
+        // Player dies
+        return;
+    }
     statusBar->updateLife(vida);
 }
 

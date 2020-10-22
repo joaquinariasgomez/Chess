@@ -10,7 +10,9 @@ class SpriteManager {
         void updateTexture(std::string textureName);
         void updateLife(float life);
     private:
-        void renderLife(std::string textureName, float life);
+        void renderLife(float life);
+        void renderNoLife();
+        void renderLifeCover();
         sf::Sprite sprite;
         sf::Texture texture;
 };

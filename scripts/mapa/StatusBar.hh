@@ -10,4 +10,6 @@ class StatusBar {
     private:
         SpriteManager* background;
         SpriteManager* life;
+        SpriteManager* nolife;
+        SpriteManager* lifeCover;
 };

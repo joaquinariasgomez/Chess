@@ -37,14 +37,24 @@ SpriteManager::SpriteManager(std::string textureName) { // StatusBar
         sprite.setScale(sf::Vector2f((float)Window::getBarWidth()/(float)textureWidth, (float)Window::getBarHeight()/(float)textureHeight));
     }
     else {  // Life
-        renderLife(textureName, Player::maxVida);
+        if(textureName == "life") {
+            renderLife(Player::maxVida);
+        }
+        else {
+            if(textureName == "noLife") {
+                renderNoLife();
+            }
+            else {
+                renderLifeCover();
+            }
+        }
     }
 }
 
-void SpriteManager::renderLife(std::string textureName, float currVida) { // StatusBar
+void SpriteManager::renderLife(float currVida) { // StatusBar
     float maxVida = Player::maxVida;
 
-    texture = TextureLoader::getTexture(textureName);
+    texture = TextureLoader::getTexture("life");
     sprite.setTexture(texture);
 
     sf::Vector2u texSize = texture.getSize();
@@ -52,13 +62,41 @@ void SpriteManager::renderLife(std::string textureName, float currVida) { // Sta
     unsigned int textureHeight = texSize.y;
 
     sprite.setPosition(sf::Vector2f(Window::getBarLifeSeparationWidth(), Window::getBarLifeSeparationHeight()));
-    float lifeMaxWidthPix = Window::getBarWidth() - Window::getBarLifeSeparationWidth();
+    float lifeMaxWidthPix = Window::getBarWidth() - Window::getBarLifeSeparationWidth() - Window::getPixelSize()*2;
     float currLifeWidthPix = (currVida / maxVida) * lifeMaxWidthPix;
     sprite.setScale(sf::Vector2f(currLifeWidthPix/(float)textureWidth, (float)Window::getBarLifeHeight()/(float)textureHeight));
 }
 
+void SpriteManager::renderNoLife() {
+    texture = TextureLoader::getTexture("noLife");
+    sprite.setTexture(texture);
+
+    sf::Vector2u texSize = texture.getSize();
+    unsigned int textureWidth = texSize.x;
+    unsigned int textureHeight = texSize.y;
+
+    sprite.setPosition(sf::Vector2f(Window::getBarLifeSeparationWidth(), Window::getBarLifeSeparationHeight()));
+    float lifeMaxWidthPix = Window::getBarWidth() - Window::getBarLifeSeparationWidth() - Window::getPixelSize()*2;
+    sprite.setScale(sf::Vector2f(lifeMaxWidthPix/(float)textureWidth, (float)Window::getBarLifeHeight()/(float)textureHeight));
+}
+
+void SpriteManager::renderLifeCover() { // StatusBar
+    texture = TextureLoader::getTexture("lifeCover");
+    sprite.setTexture(texture);
+
+    sf::Vector2u texSize = texture.getSize();
+    unsigned int textureWidth = texSize.x;
+    unsigned int textureHeight = texSize.y;
+
+    float lifeMaxWidthPix = Window::getBarWidth() - Window::getBarLifeSeparationWidth() + Window::getPixelSize()*2;
+    float lifeMaxHeightPix = (float)Window::getBarLifeHeight() + Window::getPixelSize()*4;
+
+    sprite.setPosition(sf::Vector2f(Window::getBarLifeSeparationWidth() - Window::getPixelSize()*2, Window::getBarLifeSeparationHeight() - Window::getPixelSize()*2));
+    sprite.setScale(sf::Vector2f(lifeMaxWidthPix/(float)textureWidth,lifeMaxHeightPix/(float)textureHeight));
+}
+
 void SpriteManager::updateLife(float life) { // StatusBar
-    renderLife("life", life);
+    renderLife(life);
 }
 
 void SpriteManager::updatePosition(int fila, int columna) {

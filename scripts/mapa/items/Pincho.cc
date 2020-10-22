@@ -11,9 +11,9 @@ void Pincho::draw(sf::RenderWindow& window) const {
 void Pincho::hurt(Player& player) {
     int damage;
     switch(gravedad) {
-        case 1: damage = 20; break;
-        case 2: damage = 30; break;
-        case 3: damage = 40; break;
+        case 1: damage = 10; break;
+        case 2: damage = 20; break;
+        case 3: damage = 30; break;
     }
     player.hurt(damage);
     sprite->updateTexture("pincho"+std::to_string(gravedad)+"sangre");
