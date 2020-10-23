@@ -2,7 +2,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(myGame LANGUAGES CXX)
+project(PuzzleGame LANGUAGES CXX)
 
 find_package(SFML 2.5.1 COMPONENTS system window graphics network audio)
 
@@ -21,5 +21,5 @@ file(GLOB SOURCES
     "scripts/weapons/*.cc"
 )
 
-add_executable(myGame ${SOURCES})
-target_link_libraries(myGame sfml-graphics sfml-window sfml-system)
+add_executable(PuzzleGame ${SOURCES})
+target_link_libraries(PuzzleGame sfml-graphics sfml-window sfml-system)
