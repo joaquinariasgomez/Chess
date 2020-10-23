@@ -6,7 +6,7 @@
 #include "../weapons/Espada.hh"
 #include "../weapons/Escudo.hh"
 
-Player::Player(StatusBar* statusBar): vida(75), statusBar(statusBar), currentArma(NULL), armaId(0) {
+Player::Player(StatusBar* statusBar): vida(75), statusBar(statusBar), currentArma(0) {
     int coordX, coordY; // If not found, coords of player are 0,0
     for(int i=0; i<Mapa::dimension; ++i) {
         for(int j=0; j<Mapa::dimension; ++j) {
@@ -21,13 +21,14 @@ Player::Player(StatusBar* statusBar): vida(75), statusBar(statusBar), currentArm
     sprite = new SpriteManager(fila, columna, "player");
     statusBar->updateLife(vida);
 
-    armas.push_back(currentArma);
+    armas.push_back(NULL);
     armas.push_back(new Espada(fila, columna));
     armas.push_back(new Escudo(fila, columna));
 }
 
 void Player::draw(sf::RenderWindow& window) const {
     window.draw(sprite->getSprite());   // Player sprite
+    if(getWeapon() != NULL) {getWeapon()->draw(window);}  // Draw weapon
 }
 
 void Player::hurt(int damage) {
@@ -60,12 +61,18 @@ void Player::evaluateEvent(sf::Event event, Mapa& mapa) {
 }
 
 void Player::changeWeapon() {
-    (armaId == 2) ? armaId = 0 : ++armaId;
-    currentArma = armas[armaId];
+    (currentArma == 2) ? currentArma = 0 : ++currentArma;
+}
+
+Arma* Player::getWeapon() const {
+    return armas[currentArma];
 }
 
 void Player::updateSpritePosition() {
     sprite->updatePosition(fila, columna);
+    for(auto arma: armas) {
+        if(arma != NULL) arma->updatePosition(fila, columna);
+    }
 }
 
 std::string guessDirection(int currFila, int currCol, int objFila, int objCol) {

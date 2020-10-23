@@ -58,8 +58,14 @@ SpriteManager::SpriteManager(std::string textureName) { // StatusBar
 
 void SpriteManager::renderWeapon(int fila, int columna) {
     sf::Vector2u texSize = texture.getSize();
+
     unsigned int textureWidth = texSize.x;
     unsigned int textureHeight = texSize.y;
+
+    float spriteWidth = (float)Window::getMapWidth() / (float)Mapa::dimension;
+    float spriteHeight = (float)Window::getMapHeight() / (float)Mapa::dimension;
+    sprite.setPosition(sf::Vector2f(columna * spriteHeight, fila * spriteWidth + Window::getBarHeight()));
+    sprite.setScale(sf::Vector2f(spriteWidth / (float)textureWidth, spriteHeight / (float)textureHeight));
 }
 
 void SpriteManager::renderLife(float currVida) { // StatusBar

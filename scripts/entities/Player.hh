@@ -13,6 +13,7 @@ class Player {
         void draw(sf::RenderWindow& window) const;
         float getVida() const {return vida;}
         void hurt(int damage);
+        Arma* getWeapon() const;
     private:
         void moveLeft(Mapa& mapa);
         void moveRight(Mapa& mapa);
@@ -21,9 +22,8 @@ class Player {
         void updateSpritePosition();
         void checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredColumna);
         void changeWeapon();
-        Arma* currentArma;
-        std::vector<Arma*> armas;
-        int armaId; // 0 -> No arma, 1,2 -> Espada, Escudo
+        int currentArma;
+        std::vector<Arma*> armas; // 0 -> No arma, 1,2 -> Espada, Escudo
         int fila;
         int columna;
         SpriteManager* sprite;  //player sprite

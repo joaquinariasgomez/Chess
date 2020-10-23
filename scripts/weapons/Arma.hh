@@ -10,6 +10,8 @@ class Arma {
         int columna;
     public:
         virtual void draw(sf::RenderWindow& window) const = 0;
+        virtual void updatePosition(int fila, int columna) = 0;
+        SpriteManager* getSprite() {return sprite;}
         virtual ~Arma() {}
         int id; // 1 -> Espada
                 // 2 -> Escudo
