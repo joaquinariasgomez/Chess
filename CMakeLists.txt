@@ -17,6 +17,8 @@ file(GLOB SOURCES
     "scripts/entities/*.cc"
     "scripts/graphics/*.hh"
     "scripts/graphics/*.cc"
+    "scripts/weapons/*.hh"
+    "scripts/weapons/*.cc"
 )
 
 add_executable(myGame ${SOURCES})

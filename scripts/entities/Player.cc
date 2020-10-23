@@ -3,8 +3,10 @@
 #include "../mapa/items/Roca.hh"
 #include "../mapa/items/Pared.hh"
 #include "../mapa/items/Pincho.hh"
+#include "../weapons/Espada.hh"
+#include "../weapons/Escudo.hh"
 
-Player::Player(StatusBar* statusBar): vida(100), statusBar(statusBar) {
+Player::Player(StatusBar* statusBar): vida(75), statusBar(statusBar), currentArma(NULL), armaId(0) {
     int coordX, coordY; // If not found, coords of player are 0,0
     for(int i=0; i<Mapa::dimension; ++i) {
         for(int j=0; j<Mapa::dimension; ++j) {
@@ -17,6 +19,11 @@ Player::Player(StatusBar* statusBar): vida(100), statusBar(statusBar) {
     fila = coordX;
     columna = coordY;
     sprite = new SpriteManager(fila, columna, "player");
+    statusBar->updateLife(vida);
+
+    armas.push_back(currentArma);
+    armas.push_back(new Espada(fila, columna));
+    armas.push_back(new Escudo(fila, columna));
 }
 
 void Player::draw(sf::RenderWindow& window) const {
@@ -26,10 +33,12 @@ void Player::draw(sf::RenderWindow& window) const {
 void Player::hurt(int damage) {
     vida -= damage;
     if(vida < 0) {
-        // Player dies
-        return;
+        vida = 0;
     }
     statusBar->updateLife(vida);
+    if(vida == 0) {
+        // Player dies
+    }
 }
 
 void Player::evaluateEvent(sf::Event event, Mapa& mapa) {
@@ -45,6 +54,14 @@ void Player::evaluateEvent(sf::Event event, Mapa& mapa) {
     if (event.key.code == sf::Keyboard::Down){
         moveDown(mapa);
     }
+    if (event.key.code == sf::Keyboard::A) {
+        changeWeapon();
+    }
+}
+
+void Player::changeWeapon() {
+    (armaId == 2) ? armaId = 0 : ++armaId;
+    currentArma = armas[armaId];
 }
 
 void Player::updateSpritePosition() {

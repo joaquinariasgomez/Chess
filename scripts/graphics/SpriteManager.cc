@@ -4,7 +4,7 @@
 #include "../entities/Player.hh"
 #include "Window.hh"
 
-SpriteManager::SpriteManager(int fila, int columna, std::string textureName) {
+SpriteManager::SpriteManager(int fila, int columna, std::string textureName, bool weapon) {
     texture = TextureLoader::getTexture(textureName);
     sprite.setTexture(texture);
 
@@ -18,10 +18,15 @@ SpriteManager::SpriteManager(int fila, int columna, std::string textureName) {
         sprite.setScale(sf::Vector2f((float)Window::getMapWidth()/(float)textureWidth, (float)Window::getMapHeight()/(float)textureHeight));
     }
     else {
-        float spriteWidth = (float)Window::getMapWidth() / (float)Mapa::dimension;
-        float spriteHeight = (float)Window::getMapHeight() / (float)Mapa::dimension;
-        sprite.setPosition(sf::Vector2f(columna * spriteHeight, fila * spriteWidth + Window::getBarHeight()));
-        sprite.setScale(sf::Vector2f(spriteWidth / (float)textureWidth, spriteHeight / (float)textureHeight));
+        if(weapon) {
+            renderWeapon(fila, columna);
+        }
+        else {
+            float spriteWidth = (float)Window::getMapWidth() / (float)Mapa::dimension;
+            float spriteHeight = (float)Window::getMapHeight() / (float)Mapa::dimension;
+            sprite.setPosition(sf::Vector2f(columna * spriteHeight, fila * spriteWidth + Window::getBarHeight()));
+            sprite.setScale(sf::Vector2f(spriteWidth / (float)textureWidth, spriteHeight / (float)textureHeight));
+        }
     }
 }
 
@@ -49,6 +54,12 @@ SpriteManager::SpriteManager(std::string textureName) { // StatusBar
             }
         }
     }
+}
+
+void SpriteManager::renderWeapon(int fila, int columna) {
+    sf::Vector2u texSize = texture.getSize();
+    unsigned int textureWidth = texSize.x;
+    unsigned int textureHeight = texSize.y;
 }
 
 void SpriteManager::renderLife(float currVida) { // StatusBar

@@ -3,13 +3,14 @@
 
 class SpriteManager {
     public:
-        SpriteManager(int fila, int columna, std::string textureName);  // Map
+        SpriteManager(int fila, int columna, std::string textureName, bool weapon=false);  // Map
         SpriteManager(std::string textureName);  // StatusBar
         sf::Sprite getSprite() const;
         void updatePosition(int fila, int columna);
         void updateTexture(std::string textureName);
         void updateLife(float life);
     private:
+        void renderWeapon(int fila, int columna);
         void renderLife(float life);
         void renderNoLife();
         void renderLifeCover();
