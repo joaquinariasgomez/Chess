@@ -42,18 +42,50 @@ void Player::hurt(int damage) {
     }
 }
 
+void Player::evaluateLeft(Mapa& mapa) {
+    if(currentArma == 0) moveLeft(mapa);
+    if(currentArma == 1) // Espada
+        {}//attackLeft();
+    if(currentArma == 2) // Escudo
+        {}//defendLeft();
+}
+
+void Player::evaluateRight(Mapa& mapa) {
+    if(currentArma == 0) moveRight(mapa);
+    if(currentArma == 1) // Espada
+        {}//attackRight();
+    if(currentArma == 2) // Escudo
+        {}//defendRight();
+}
+
+void Player::evaluateUp(Mapa& mapa) {
+    if(currentArma == 0) moveUp(mapa);
+    if(currentArma == 1) // Espada
+        {}//attackUp();
+    if(currentArma == 2) // Escudo
+        {}//defendUp();
+}
+
+void Player::evaluateDown(Mapa& mapa) {
+    if(currentArma == 0) moveDown(mapa);
+    if(currentArma == 1) // Espada
+        {}//attackDown();
+    if(currentArma == 2) // Escudo
+        {}//defendDown();
+}
+
 void Player::evaluateEvent(sf::Event event, Mapa& mapa) {
     if (event.key.code == sf::Keyboard::Left){
-        moveLeft(mapa);
+        evaluateLeft(mapa);
     }
     if (event.key.code == sf::Keyboard::Right){
-        moveRight(mapa);
+        evaluateRight(mapa);
     }
     if (event.key.code == sf::Keyboard::Up){
-        moveUp(mapa);
+        evaluateUp(mapa);
     }
     if (event.key.code == sf::Keyboard::Down){
-        moveDown(mapa);
+        evaluateDown(mapa);
     }
     if (event.key.code == sf::Keyboard::A) {
         changeWeapon();

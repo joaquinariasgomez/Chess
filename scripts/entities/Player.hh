@@ -19,6 +19,11 @@ class Player {
         void moveRight(Mapa& mapa);
         void moveUp(Mapa& mapa);
         void moveDown(Mapa& mapa);
+        void evaluateLeft(Mapa& mapa);
+        void evaluateRight(Mapa& mapa);
+        void evaluateUp(Mapa& mapa);
+        void evaluateDown(Mapa& mapa);
+
         void updateSpritePosition();
         void checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredColumna);
         void changeWeapon();
