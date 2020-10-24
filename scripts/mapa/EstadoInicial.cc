@@ -37,7 +37,6 @@ int EstadoInicial::getElementFromCelda(int i, int j) {
     std::string line;
     int a = 0, b = 0;
     while (std::getline(file, line)) {
-        //std::cout << line << "\n";
         size_t pos = 0;
         std::string token;
         while((pos = line.find(delimiter)) != std::string::npos) {

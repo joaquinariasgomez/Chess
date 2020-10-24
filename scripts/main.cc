@@ -1,6 +1,7 @@
 #include <iostream>
-#include "mapa/Mapa.hh"
+//#include "mapa/Mapa.hh"
 #include "mapa/StatusBar.hh"
+#include "mapa/Level.hh"
 #include <SFML/Graphics.hpp>
 #include "graphics/SpriteManager.hh"
 #include "graphics/Window.hh"
@@ -11,9 +12,9 @@ const float MAX_VIDA = 100;
 float Player::maxVida{MAX_VIDA};
 int Mapa::dimension{DIM};
 
-void draw(sf::RenderWindow& window, Mapa& mapa, StatusBar& statusBar, Player& player) {
+void draw(sf::RenderWindow& window, Level& level, StatusBar& statusBar, Player& player) {
     statusBar.draw(window);
-    mapa.draw(window);
+    level.draw(window);     // Draw map and entities
     player.draw(window);
 }
 
@@ -22,8 +23,10 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(Window::getMapWidth(), Window::getMapHeight() + Window::getBarHeight()), "My game kappa", sf::Style::Close);
 
     StatusBar statusBar;
-    Mapa mapa;
     Player player(&statusBar);
+
+    Mapa mapa;
+    Level currentLevel(&mapa);
     // run the program as long as the window is open
     while (window.isOpen())
     {
@@ -35,7 +38,7 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
             if (event.type == sf::Event::EventType::KeyPressed){
-                player.evaluateEvent(event, mapa);
+                player.evaluateEvent(event, currentLevel);
             }
         }
 
@@ -43,7 +46,7 @@ int main() {
         window.clear(sf::Color::White);
 
         // draw everything here...
-        draw(window, mapa, statusBar, player);
+        draw(window, currentLevel, statusBar, player);
 
         // end the current frame
         window.display();

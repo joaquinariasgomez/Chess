@@ -42,50 +42,50 @@ void Player::hurt(int damage) {
     }
 }
 
-void Player::evaluateLeft(Mapa& mapa) {
-    if(currentArma == 0) moveLeft(mapa);
+void Player::evaluateLeft(Level& level) {
+    if(currentArma == 0) moveLeft(level);
     if(currentArma == 1) // Espada
         {}//attackLeft();
     if(currentArma == 2) // Escudo
         {}//defendLeft();
 }
 
-void Player::evaluateRight(Mapa& mapa) {
-    if(currentArma == 0) moveRight(mapa);
+void Player::evaluateRight(Level& level) {
+    if(currentArma == 0) moveRight(level);
     if(currentArma == 1) // Espada
         {}//attackRight();
     if(currentArma == 2) // Escudo
         {}//defendRight();
 }
 
-void Player::evaluateUp(Mapa& mapa) {
-    if(currentArma == 0) moveUp(mapa);
+void Player::evaluateUp(Level& level) {
+    if(currentArma == 0) moveUp(level);
     if(currentArma == 1) // Espada
         {}//attackUp();
     if(currentArma == 2) // Escudo
         {}//defendUp();
 }
 
-void Player::evaluateDown(Mapa& mapa) {
-    if(currentArma == 0) moveDown(mapa);
+void Player::evaluateDown(Level& level) {
+    if(currentArma == 0) moveDown(level);
     if(currentArma == 1) // Espada
         {}//attackDown();
     if(currentArma == 2) // Escudo
         {}//defendDown();
 }
 
-void Player::evaluateEvent(sf::Event event, Mapa& mapa) {
+void Player::evaluateEvent(sf::Event event, Level& level) {
     if (event.key.code == sf::Keyboard::Left){
-        evaluateLeft(mapa);
+        evaluateLeft(level);
     }
     if (event.key.code == sf::Keyboard::Right){
-        evaluateRight(mapa);
+        evaluateRight(level);
     }
     if (event.key.code == sf::Keyboard::Up){
-        evaluateUp(mapa);
+        evaluateUp(level);
     }
     if (event.key.code == sf::Keyboard::Down){
-        evaluateDown(mapa);
+        evaluateDown(level);
     }
     if (event.key.code == sf::Keyboard::A) {
         changeWeapon();
@@ -115,14 +115,14 @@ std::string guessDirection(int currFila, int currCol, int objFila, int objCol) {
     return "";
 }
 
-void Player::checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredColumna) {
+void Player::checkItem(Level& level, Item* objItem, int desiredFila, int desiredColumna) {
     std::string direction = guessDirection(fila, columna, desiredFila, desiredColumna);
     // Examinar item
     switch(objItem->id) {
         case 1: // Pared
             break;
         case 2: // Roca
-            if(dynamic_cast<Roca*>(objItem)->move(mapa, direction) != -1) {    // Returns -1 if it cannot move the rock
+            if(dynamic_cast<Roca*>(objItem)->move(level, direction) != -1) {    // Returns -1 if it cannot move the rock
                 fila = desiredFila;
                 columna = desiredColumna;
                 updateSpritePosition();
@@ -144,46 +144,46 @@ void Player::checkItem(Mapa& mapa, Item* objItem, int desiredFila, int desiredCo
     }
 }
 
-void Player::moveRight(Mapa& mapa) {
+void Player::moveRight(Level& level) {
     if(columna == (Mapa::dimension - 1)) return;
     // Check which item is in fila, columna + 1
-    Item* objItem = mapa.celdas[{fila, columna + 1}]->getLastItem();
+    Item* objItem = level.mapa->celdas[{fila, columna + 1}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
         columna++;
         updateSpritePosition();
-    } else checkItem(mapa, objItem, fila, columna + 1);
+    } else checkItem(level, objItem, fila, columna + 1);
 }
 
-void Player::moveUp(Mapa& mapa) {
+void Player::moveUp(Level& level) {
     if(fila == 0) return;
     // Check which item is in fila - 1, columna
-    Item* objItem = mapa.celdas[{fila - 1, columna}]->getLastItem();
+    Item* objItem = level.mapa->celdas[{fila - 1, columna}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
         fila--;
         updateSpritePosition();
-    } else checkItem(mapa, objItem, fila - 1, columna);
+    } else checkItem(level, objItem, fila - 1, columna);
 }
 
-void Player::moveDown(Mapa& mapa) {
+void Player::moveDown(Level& level) {
     if(fila == (Mapa::dimension - 1)) return;
     // Check which item is in fila + 1, columna
-    Item* objItem = mapa.celdas[{fila + 1, columna}]->getLastItem();
+    Item* objItem = level.mapa->celdas[{fila + 1, columna}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
         fila++;
         updateSpritePosition();
-    } else checkItem(mapa, objItem, fila + 1, columna);
+    } else checkItem(level, objItem, fila + 1, columna);
 }
 
-void Player::moveLeft(Mapa& mapa) {
+void Player::moveLeft(Level& level) {
     if(columna == 0) return;
     // Check which item is in fila, columna - 1
-    Item* objItem = mapa.celdas[{fila, columna - 1}]->getLastItem();
+    Item* objItem = level.mapa->celdas[{fila, columna - 1}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
         columna--;
         updateSpritePosition();
-    } else checkItem(mapa, objItem, fila, columna - 1);
+    } else checkItem(level, objItem, fila, columna - 1);
 }
