@@ -1,9 +1,9 @@
-#include "EstadoInicial.hh"
+#include "ReadState.hh"
 #include <iostream>
 #include <fstream>
 #include <string>
 
-std::pair<int,int> EstadoInicial::guessDimensions(std::string fileName, std::string delimiter) {
+std::pair<int,int> ReadState::guessDimensions(std::string fileName, std::string delimiter) {
     int filas = 0;
     int columnas = 0;
      std::ifstream file(fileName);
@@ -23,12 +23,12 @@ std::pair<int,int> EstadoInicial::guessDimensions(std::string fileName, std::str
     return std::pair<int,int>(filas, columnas);
 }
 
-int EstadoInicial::getElementFromCelda(int i, int j) {
+int ReadState::getElementFromCelda(int i, int j) {
     //Leer del fichero la posición i, j y devolver el valor que contenga, que ya está cifrado
     std::string fileName = "../estados/estadoInicial.txt";
     std::ifstream file(fileName);
     std::string delimiter = " ";
-    std::pair<int,int> dimensions = EstadoInicial::guessDimensions(fileName, delimiter);
+    std::pair<int,int> dimensions = ReadState::guessDimensions(fileName, delimiter);
     int filas = dimensions.first;
     int columnas = dimensions.second;
     

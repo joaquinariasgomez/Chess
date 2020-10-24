@@ -28,6 +28,8 @@ class Player {
         void updateSpritePosition();
         void checkItem(Level& level, Item* objItem, int desiredFila, int desiredColumna);
         void changeWeapon();
+
+        void die();
         int currentArma;
         std::vector<Arma*> armas; // 0 -> No arma, 1,2 -> Espada, Escudo
         int fila;
@@ -35,4 +37,5 @@ class Player {
         SpriteManager* sprite;  //player sprite
         float vida;
         StatusBar* statusBar;
+        int score;
 };

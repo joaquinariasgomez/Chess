@@ -25,8 +25,7 @@ int main() {
     StatusBar statusBar;
     Player player(&statusBar);
 
-    Mapa mapa;
-    Level currentLevel(&mapa);
+    Level currentLevel(1);   // Load level 1
     // run the program as long as the window is open
     while (window.isOpen())
     {

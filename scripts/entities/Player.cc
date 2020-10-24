@@ -1,16 +1,16 @@
 #include "Player.hh"
-#include "../mapa/EstadoInicial.hh"
+#include "../mapa/ReadState.hh"
 #include "../mapa/items/Roca.hh"
 #include "../mapa/items/Pared.hh"
 #include "../mapa/items/Pincho.hh"
 #include "../weapons/Espada.hh"
 #include "../weapons/Escudo.hh"
 
-Player::Player(StatusBar* statusBar): vida(75), statusBar(statusBar), currentArma(0) {
+Player::Player(StatusBar* statusBar): vida(75), statusBar(statusBar), currentArma(0), score(0) {
     int coordX, coordY; // If not found, coords of player are 0,0
     for(int i=0; i<Mapa::dimension; ++i) {
         for(int j=0; j<Mapa::dimension; ++j) {
-            if(EstadoInicial::getElementFromCelda(i,j) == 5) {
+            if(ReadState::getElementFromCelda(i,j) == 5) {
                 coordX = i;
                 coordY = j;
             }
@@ -39,7 +39,13 @@ void Player::hurt(int damage) {
     statusBar->updateLife(vida);
     if(vida == 0) {
         // Player dies
+        die();
     }
+}
+
+void Player::die() {
+    std::cout << "YOU DIED" << std::endl;
+    std::cout << "Score: " << score << std::endl;
 }
 
 void Player::evaluateLeft(Level& level) {

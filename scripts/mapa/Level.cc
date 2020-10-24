@@ -1,6 +1,6 @@
 #include "Level.hh"
 
-Level::Level(Mapa* mapa): mapa(mapa) {
+Level::Level(int levelId): mapa(new Mapa()), levelId(levelId) {
 
 }
 
@@ -8,5 +8,5 @@ void Level::draw(sf::RenderWindow& window) const {
     // Dibujar nivel no es más que dibujar mapa y luego las entidades enemigas o amigas que estén sobre él
     mapa->draw(window);
     // Draw entities
-    
+
 }

@@ -1,10 +1,10 @@
 #include "Mapa.hh"
-#include "EstadoInicial.hh"
+#include "ReadState.hh"
 
 Mapa::Mapa(): sprite(new SpriteManager(0, 0, "background")) {
     for(int i=0; i<dimension; ++i) {
         for(int j=0; j<dimension; ++j) {
-            celdas[{i,j}] = new Celda(i,j,EstadoInicial::getElementFromCelda(i,j));
+            celdas[{i,j}] = new Celda(i,j,ReadState::getElementFromCelda(i,j));
         }
     }
 }
