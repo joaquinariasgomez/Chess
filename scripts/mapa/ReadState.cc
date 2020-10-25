@@ -39,6 +39,7 @@ int ReadState::getElementFromCelda(int levelId, int i, int j) {
             }
         }
     }
+    if(!mapFound) {std::cout << "ERROR in level"+std::to_string(levelId)+", "+mapKeyword+" NOT FOUND"; exit(-1);}
     int rowCount = 0;
     int matrix[guessedWidthDim][guessedWidthDim];
     int a = 0, b = 0;
