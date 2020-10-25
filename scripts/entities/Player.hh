@@ -7,8 +7,7 @@
 
 class Player {
     public:
-        Player(StatusBar* statusBar);
-        //void evaluateEvent(sf::Event event, Mapa& mapa);
+        Player(StatusBar* statusBar, Level* level);
         void evaluateEvent(sf::Event event, Level& level);
         static float maxVida;
         void draw(sf::RenderWindow& window) const;

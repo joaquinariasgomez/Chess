@@ -22,10 +22,10 @@ int main() {
     // create the window
     sf::RenderWindow window(sf::VideoMode(Window::getMapWidth(), Window::getMapHeight() + Window::getBarHeight()), "My game kappa", sf::Style::Close);
 
-    StatusBar statusBar;
-    Player player(&statusBar);
-
     Level currentLevel(1);   // Load level 1
+
+    StatusBar statusBar;
+    Player player(&statusBar, &currentLevel);
     // run the program as long as the window is open
     while (window.isOpen())
     {

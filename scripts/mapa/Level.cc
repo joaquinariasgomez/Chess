@@ -1,7 +1,8 @@
 #include "Level.hh"
 
-Level::Level(int levelId): mapa(new Mapa(levelId)), levelId(levelId) {
-
+Level::Level(int levelId): levelId(levelId), state(new ReadState()) {
+    state->inspectElements(levelId);
+    mapa = new Mapa(levelId, state);
 }
 
 void Level::draw(sf::RenderWindow& window) const {

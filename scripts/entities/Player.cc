@@ -6,18 +6,10 @@
 #include "../weapons/Espada.hh"
 #include "../weapons/Escudo.hh"
 
-Player::Player(StatusBar* statusBar): vida(75), statusBar(statusBar), currentArma(0), score(0) {
-    int coordX, coordY; // If not found, coords of player are 0,0
-    for(int i=0; i<Mapa::dimension; ++i) {
-        for(int j=0; j<Mapa::dimension; ++j) {
-            if(ReadState::getElementFromCelda(1,i,j) == 5) {    // Read player from level 1
-                coordX = i;
-                coordY = j;
-            }
-        }
-    }
-    fila = coordX;
-    columna = coordY;
+Player::Player(StatusBar* statusBar, Level* level): vida(100), statusBar(statusBar), currentArma(0), score(0) {
+    std::pair<int, int> coords = level->getState()->getPlayerCoords();
+    fila = coords.first;
+    columna = coords.second;
     sprite = new SpriteManager(fila, columna, "player");
     statusBar->updateLife(vida);
 

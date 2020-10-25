@@ -1,23 +1,8 @@
 #include "ReadState.hh"
-#include <iostream>
-#include <fstream>
-#include <string>
 
-int ReadState::guessWidthDimension(std::string line, char delimiter) {
-    int width =0;
-    size_t pos;
-    while((pos = line.find(delimiter)) != std::string::npos) {
-        ++width;
-        do {
-            line.erase(0, 1);   // Eliminar primer elemento de la línea
-        } while(line[0] == delimiter);
-    }
-    return width + 1;   // Cuenta los espacios, asi que devolver el número de espacios más 1
-}
+ReadState::ReadState() {}
 
-int ReadState::getElementFromCelda(int levelId, int i, int j) {
-    // Leer del fichero la posición i, j y devolver el valor que contenga, que ya está cifrado
-    // Buscar el identificador "mapa" dentro de level.txt
+void ReadState::inspectElements(int levelId) {
     std::string fileName = "../levels/level"+std::to_string(levelId)+".txt";
     std::ifstream file(fileName);
     char delimiter = ' ';
@@ -25,11 +10,11 @@ int ReadState::getElementFromCelda(int levelId, int i, int j) {
 
     // Find mapKeyword
     bool mapFound = false;
-    int guessedWidthDim = 0;
+    int guessedWidthDimension = 0;
     std::string line;
     while(std::getline(file, line)) {
         if(mapFound) {
-            guessedWidthDim = guessWidthDimension(line, delimiter);
+            guessedWidthDimension = guessWidthDimension(line, delimiter);
             break;
         }
         else {
@@ -40,8 +25,17 @@ int ReadState::getElementFromCelda(int levelId, int i, int j) {
         }
     }
     if(!mapFound) {std::cout << "ERROR in level"+std::to_string(levelId)+", "+mapKeyword+" NOT FOUND"; exit(-1);}
+    initializeMatrix(file, guessedWidthDimension, line, delimiter);
+}
+
+void ReadState::initializeMatrix(std::ifstream& file, int guessedWidthDimension, std::string line, char delimiter) {
     int rowCount = 0;
-    int matrix[guessedWidthDim][guessedWidthDim];
+    this->dim = guessedWidthDimension;
+    matrix = new int*[guessedWidthDimension];
+    for(int i=0; i<guessedWidthDimension; ++i) {
+        matrix[i] = new int[guessedWidthDimension];
+    }
+
     int a = 0, b = 0;
     do {
         // Analizar fila
@@ -59,7 +53,35 @@ int ReadState::getElementFromCelda(int levelId, int i, int j) {
         b = 0;
 
         ++rowCount;
-    } while(std::getline(file, line) && rowCount < guessedWidthDim);
+    } while(std::getline(file, line) && rowCount < guessedWidthDimension);
+}
 
+int ReadState::guessWidthDimension(std::string line, char delimiter) {
+    int width =0;
+    size_t pos;
+    while((pos = line.find(delimiter)) != std::string::npos) {
+        ++width;
+        do {
+            line.erase(0, 1);   // Eliminar primer elemento de la línea
+        } while(line[0] == delimiter);
+    }
+    return width + 1;   // Cuenta los espacios, asi que devolver el número de espacios más 1
+}
+
+int ReadState::getElementFromCelda(int i, int j) {
     return matrix[i][j];
+}
+
+std::pair<int, int> ReadState::getPlayerCoords() const {
+    int fila = 0;
+    int columna = 0;
+    for(int i=0; i<dim; ++i) {
+        for(int j=0; j<dim; ++j) {
+            if(matrix[i][j] == 5) {
+                fila = i;
+                columna = j;
+            }
+        }
+    }
+    return {fila, columna};
 }
