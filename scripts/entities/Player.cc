@@ -10,7 +10,7 @@ Player::Player(StatusBar* statusBar): vida(75), statusBar(statusBar), currentArm
     int coordX, coordY; // If not found, coords of player are 0,0
     for(int i=0; i<Mapa::dimension; ++i) {
         for(int j=0; j<Mapa::dimension; ++j) {
-            if(ReadState::getElementFromCelda(i,j) == 5) {
+            if(ReadState::getElementFromCelda(1,i,j) == 5) {    // Read player from level 1
                 coordX = i;
                 coordY = j;
             }

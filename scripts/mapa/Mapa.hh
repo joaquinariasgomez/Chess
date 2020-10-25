@@ -7,7 +7,7 @@
 
 class Mapa {
     public:
-        Mapa();
+        Mapa(int levelId);
         void draw(sf::RenderWindow& window) const;
 
         std::map<std::pair<int, int>, Celda*> celdas;

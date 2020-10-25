@@ -14,7 +14,7 @@ Celda::Celda(int fila, int columna, int itemValor): fila_(fila), columna_(column
         case 6: items.push_back(new Pincho(fila, columna, 1)); break;
         case 7: items.push_back(new Pincho(fila, columna, 2)); break;
         case 8: items.push_back(new Pincho(fila, columna, 3)); break;
-        case -1:
+        case 0:
         default: items.push_back(NULL);
     }
 }

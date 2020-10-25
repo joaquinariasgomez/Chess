@@ -1,6 +1,6 @@
 #include "Level.hh"
 
-Level::Level(int levelId): mapa(new Mapa()), levelId(levelId) {
+Level::Level(int levelId): mapa(new Mapa(levelId)), levelId(levelId) {
 
 }
 
