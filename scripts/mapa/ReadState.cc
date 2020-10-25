@@ -18,9 +18,10 @@ void ReadState::inspectElements(int levelId) {
             break;
         }
         else {
+            //if(blablabla) {} Celda objetivo FOUND
+            //if(blablabla) {} Esqueleto FOUND
             if(line.find(mapKeyword) != std::string::npos) {
                 mapFound = true;
-                continue;
             }
         }
     }

@@ -1,5 +1,4 @@
 #include "Player.hh"
-#include "../mapa/ReadState.hh"
 #include "../mapa/items/Roca.hh"
 #include "../mapa/items/Pared.hh"
 #include "../mapa/items/Pincho.hh"
