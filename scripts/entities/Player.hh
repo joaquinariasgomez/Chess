@@ -25,7 +25,8 @@ class Player {
         void updateSpritePosition();
         void checkItem(Level& level, Item* objItem, int desiredFila, int desiredColumna);
         void changeWeapon();
-
+        
+        void checkCeldaObjetivo(Level& level) const;
         void die();
         int currentArma;
         std::vector<Arma*> armas; // 0 -> No arma, 1,2 -> Espada, Escudo

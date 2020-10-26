@@ -8,7 +8,7 @@
 
 class Mapa {
     public:
-        Mapa(int levelId, ReadState* state);
+        Mapa(int levelId, ReadState* state, std::pair<int, int> punteroCeldaObjetivo);
         void draw(sf::RenderWindow& window) const;
 
         std::map<std::pair<int, int>, Celda*> celdas;

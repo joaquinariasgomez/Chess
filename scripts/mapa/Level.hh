@@ -8,6 +8,7 @@ class Level {
         Level(int levelId);
         void draw(sf::RenderWindow& window) const;
         const ReadState* getState() const {return state;}
+        std::pair<int, int> getPunteroCeldaObjetivo() const {return punteroCeldaObjetivo;}
         Mapa* mapa; // Map of the level
     private:
         int levelId;

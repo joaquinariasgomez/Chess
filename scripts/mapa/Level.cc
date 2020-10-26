@@ -3,7 +3,7 @@
 Level::Level(int levelId): levelId(levelId), state(new ReadState()) {
     state->inspectElements(levelId);
     punteroCeldaObjetivo = state->getObjCoords();
-    mapa = new Mapa(levelId, state);
+    mapa = new Mapa(levelId, state, punteroCeldaObjetivo);
 }
 
 void Level::draw(sf::RenderWindow& window) const {

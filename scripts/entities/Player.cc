@@ -75,6 +75,12 @@ void Player::evaluateDown(Level& level) {
         {}//defendDown();
 }
 
+void Player::checkCeldaObjetivo(Level& level) const {
+    if(std::make_pair(fila, columna) == level.getPunteroCeldaObjetivo()) {
+        std::cout << "HE PASADO DE NIVEL" << std::endl;
+    }
+}
+
 void Player::evaluateEvent(sf::Event event, Level& level) {
     if (event.key.code == sf::Keyboard::Left){
         evaluateLeft(level);
@@ -91,6 +97,7 @@ void Player::evaluateEvent(sf::Event event, Level& level) {
     if (event.key.code == sf::Keyboard::A) {
         changeWeapon();
     }
+    checkCeldaObjetivo(level);
 }
 
 void Player::changeWeapon() {

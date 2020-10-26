@@ -5,7 +5,13 @@
 #include "items/AgujeroRelleno.hh"
 #include "items/Pincho.hh"
 
-Celda::Celda(int fila, int columna, int mapDimension, int itemValor): fila_(fila), columna_(columna), sprite(new SpriteManager(fila, columna, "celda", mapDimension)) {
+Celda::Celda(int fila, int columna, int mapDimension, int itemValor, bool objetivo): fila_(fila), columna_(columna) {
+    if(objetivo) {
+        sprite = new SpriteManager(fila, columna, "celdaObjetivo", mapDimension);
+    }
+    else {
+        sprite = new SpriteManager(fila, columna, "celda", mapDimension);
+    }
     switch(itemValor) {
         case 1: items.push_back(new Pared(fila, columna, mapDimension)); break;
         case 2: items.push_back(new Roca(fila, columna, mapDimension)); break;
