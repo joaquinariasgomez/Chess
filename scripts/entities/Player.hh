@@ -7,11 +7,10 @@
 
 class Player {
     public:
-        Player(StatusBar* statusBar, Level* level);
+        Player(Level* level);
         void evaluateEvent(sf::Event event, Level& level);
         static float maxVida;
         void draw(sf::RenderWindow& window) const;
-        float getVida() const {return vida;}
         void hurt(int damage);
         Arma* getWeapon() const;
     private:
@@ -34,7 +33,6 @@ class Player {
         int fila;
         int columna;
         SpriteManager* sprite;  //player sprite
-        float vida;
         StatusBar* statusBar;
         int score;
 };

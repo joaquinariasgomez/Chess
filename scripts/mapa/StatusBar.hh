@@ -1,15 +1,16 @@
 #pragma once
 #include "../graphics/SpriteManager.hh"
+#include "Vida.hh"
 #include <SFML/Graphics.hpp>
 
 class StatusBar {
     public:
-        StatusBar();
+        StatusBar(float startingLife);
         void draw(sf::RenderWindow& window) const;
-        void updateLife(float newLife) {life->updateLife(newLife);}
+        Vida* getLife() const {return vida;}
     private:
+        Vida* vida;
         SpriteManager* background;
-        SpriteManager* life;
         SpriteManager* nolife;
         SpriteManager* lifeCover;
 };

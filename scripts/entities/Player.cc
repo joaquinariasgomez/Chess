@@ -5,29 +5,33 @@
 #include "../weapons/Espada.hh"
 #include "../weapons/Escudo.hh"
 
-Player::Player(StatusBar* statusBar, Level* level): vida(100), statusBar(statusBar), currentArma(0), score(0) {
+Player::Player(Level* level): currentArma(0), score(0) {
     std::pair<int, int> coords = level->getState()->getPlayerCoords();
     fila = coords.first;
     columna = coords.second;
     sprite = new SpriteManager(fila, columna, "player");
-    statusBar->updateLife(vida);
 
     armas.push_back(NULL);
     armas.push_back(new Espada(fila, columna));
     armas.push_back(new Escudo(fila, columna));
+
+    float startingLife = 75;
+    statusBar = new StatusBar(startingLife);
 }
 
 void Player::draw(sf::RenderWindow& window) const {
     window.draw(sprite->getSprite());   // Player sprite
     if(getWeapon() != NULL) {getWeapon()->draw(window);}  // Draw weapon
+    statusBar->draw(window);
 }
 
 void Player::hurt(int damage) {
+    float vida = statusBar->getLife()->getVida();
     vida -= damage;
     if(vida < 0) {
         vida = 0;
     }
-    statusBar->updateLife(vida);
+    statusBar->getLife()->update(vida);
     if(vida == 0) {
         // Player dies
         die();

@@ -12,8 +12,7 @@ const float MAX_VIDA = 100;
 float Player::maxVida{MAX_VIDA};
 int Mapa::dimension{DIM};
 
-void draw(sf::RenderWindow& window, Level& level, StatusBar& statusBar, Player& player) {
-    statusBar.draw(window);
+void draw(sf::RenderWindow& window, Level& level, Player& player) {
     level.draw(window);     // Draw map and entities
     player.draw(window);
 }
@@ -24,8 +23,7 @@ int main() {
 
     Level currentLevel(1);   // Load level 1
 
-    StatusBar statusBar;
-    Player player(&statusBar, &currentLevel);
+    Player player(&currentLevel);
     // run the program as long as the window is open
     while (window.isOpen())
     {
@@ -45,7 +43,7 @@ int main() {
         window.clear(sf::Color::White);
 
         // draw everything here...
-        draw(window, currentLevel, statusBar, player);
+        draw(window, currentLevel, player);
 
         // end the current frame
         window.display();

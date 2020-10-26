@@ -1,6 +1,6 @@
 #include "StatusBar.hh"
 
-StatusBar::StatusBar(): background(new SpriteManager("statusBarBackground")), life(new SpriteManager("life")), nolife(new SpriteManager("noLife")), lifeCover(new SpriteManager("lifeCover")) {
+StatusBar::StatusBar(float startingLife): vida(new Vida(startingLife)), background(new SpriteManager("statusBarBackground")), nolife(new SpriteManager("noLife")), lifeCover(new SpriteManager("lifeCover")) {
 
 }
 
@@ -9,6 +9,6 @@ void StatusBar::draw(sf::RenderWindow& window) const {
     window.draw(background->getSprite());
     // Draw life sprites
     window.draw(nolife->getSprite());
-    window.draw(life->getSprite());
+    vida->draw(window);
     window.draw(lifeCover->getSprite());
 }
