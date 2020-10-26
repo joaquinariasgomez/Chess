@@ -21,10 +21,10 @@ void ReadState::inspectElements(int levelId) {
     while(std::getline(file, line)) {
         if(mapFound) {
             guessedWidthDimension = guessWidthDimension(line, delimiter);
+            this->mapDimension = guessedWidthDimension;
             break;
         }
         else {
-            //if(blablabla) {} Celda objetivo FOUND
             //if(blablabla) {} Esqueleto FOUND
             if(line.find(objetivoKeyword) != std::string::npos) {
                 // Analizar fila
@@ -47,7 +47,6 @@ void ReadState::inspectElements(int levelId) {
 
 void ReadState::initializeMatrix(std::ifstream& file, int guessedWidthDimension, std::string line, char delimiter) {
     int rowCount = 0;
-    this->dim = guessedWidthDimension;
     matrix = new int*[guessedWidthDimension];
     for(int i=0; i<guessedWidthDimension; ++i) {
         matrix[i] = new int[guessedWidthDimension];
@@ -92,8 +91,8 @@ int ReadState::getElementFromCelda(int i, int j) {
 std::pair<int, int> ReadState::getPlayerCoords() const {
     int fila = 0;
     int columna = 0;
-    for(int i=0; i<dim; ++i) {
-        for(int j=0; j<dim; ++j) {
+    for(int i=0; i<this->mapDimension; ++i) {
+        for(int j=0; j<this->mapDimension; ++j) {
             if(matrix[i][j] == 5) {
                 fila = i;
                 columna = j;

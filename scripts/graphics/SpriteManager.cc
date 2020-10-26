@@ -4,7 +4,7 @@
 #include "../entities/Player.hh"
 #include "Window.hh"
 
-SpriteManager::SpriteManager(int fila, int columna, std::string textureName, bool weapon) {
+SpriteManager::SpriteManager(int fila, int columna, std::string textureName, int mapDimension, bool weapon): mapDimension(mapDimension) {
     texture = TextureLoader::getTexture(textureName);
     sprite.setTexture(texture);
 
@@ -22,8 +22,8 @@ SpriteManager::SpriteManager(int fila, int columna, std::string textureName, boo
             renderWeapon(fila, columna);
         }
         else {
-            float spriteWidth = (float)Window::getMapWidth() / (float)Mapa::dimension;
-            float spriteHeight = (float)Window::getMapHeight() / (float)Mapa::dimension;
+            float spriteWidth = (float)Window::getMapWidth() / (float)mapDimension;
+            float spriteHeight = (float)Window::getMapHeight() / (float)mapDimension;
             sprite.setPosition(sf::Vector2f(columna * spriteHeight, fila * spriteWidth + Window::getBarHeight()));
             sprite.setScale(sf::Vector2f(spriteWidth / (float)textureWidth, spriteHeight / (float)textureHeight));
         }
@@ -62,8 +62,8 @@ void SpriteManager::renderWeapon(int fila, int columna) {
     unsigned int textureWidth = texSize.x;
     unsigned int textureHeight = texSize.y;
 
-    float spriteWidth = (float)Window::getMapWidth() / (float)Mapa::dimension;
-    float spriteHeight = (float)Window::getMapHeight() / (float)Mapa::dimension;
+    float spriteWidth = (float)Window::getMapWidth() / (float)mapDimension;
+    float spriteHeight = (float)Window::getMapHeight() / (float)mapDimension;
     sprite.setPosition(sf::Vector2f(columna * spriteHeight, fila * spriteWidth + Window::getBarHeight()));
     sprite.setScale(sf::Vector2f(spriteWidth / (float)textureWidth, spriteHeight / (float)textureHeight));
 }
@@ -124,8 +124,8 @@ void SpriteManager::updateLife(float life) { // StatusBar
 }
 
 void SpriteManager::updatePosition(int fila, int columna) {
-    float spriteWidth = (float)Window::getMapWidth() / (float)Mapa::dimension;
-    float spriteHeight = (float)Window::getMapHeight() / (float)Mapa::dimension;
+    float spriteWidth = (float)Window::getMapWidth() / (float)mapDimension;
+    float spriteHeight = (float)Window::getMapHeight() / (float)mapDimension;
     sprite.setPosition(sf::Vector2f(columna * spriteHeight, fila * spriteWidth + Window::getBarHeight()));
 }
 
@@ -140,7 +140,7 @@ void SpriteManager::updateTexture(std::string textureName) {
     unsigned int textureWidth = texSize.x;
     unsigned int textureHeight = texSize.y;
 
-    float spriteWidth = (float)Window::getMapWidth() / (float)Mapa::dimension;
-    float spriteHeight = (float)Window::getMapHeight() / (float)Mapa::dimension;
+    float spriteWidth = (float)Window::getMapWidth() / (float)mapDimension;
+    float spriteHeight = (float)Window::getMapHeight() / (float)mapDimension;
     sprite.setScale(sf::Vector2f(spriteWidth / (float)textureWidth, spriteHeight / (float)textureHeight));
 }

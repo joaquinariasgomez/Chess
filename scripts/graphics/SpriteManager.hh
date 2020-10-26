@@ -3,7 +3,7 @@
 
 class SpriteManager {
     public:
-        SpriteManager(int fila, int columna, std::string textureName, bool weapon=false);  // Map
+        SpriteManager(int fila, int columna, std::string textureName, int mapDimension, bool weapon=false);  // Map
         SpriteManager(std::string textureName);  // StatusBar
         sf::Sprite getSprite() const;
         void updatePosition(int fila, int columna);
@@ -16,4 +16,5 @@ class SpriteManager {
         void renderLifeCover();
         sf::Sprite sprite;
         sf::Texture texture;
+        int mapDimension;
 };

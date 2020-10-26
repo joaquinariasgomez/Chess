@@ -12,7 +12,7 @@ class Mapa {
         void draw(sf::RenderWindow& window) const;
 
         std::map<std::pair<int, int>, Celda*> celdas;
-        static int dimension;
+        int dimension;
     private:   
         SpriteManager* sprite;  //background sprite
 };

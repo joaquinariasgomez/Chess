@@ -4,7 +4,7 @@
 
 class Arma {
     protected:
-        Arma(int fila, int columna, std::string texture, int id): fila(fila), columna(columna), sprite(new SpriteManager(fila, columna, texture, true)), id(id) {}
+        Arma(int fila, int columna, int mapDimension, std::string texture, int id): fila(fila), columna(columna), sprite(new SpriteManager(fila, columna, texture, mapDimension, true)), id(id) {}
         SpriteManager* sprite;
         int fila;
         int columna;

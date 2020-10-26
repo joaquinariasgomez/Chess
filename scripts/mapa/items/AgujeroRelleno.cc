@@ -1,6 +1,6 @@
 #include "AgujeroRelleno.hh"
 
-AgujeroRelleno::AgujeroRelleno(int fila, int columna): Item(fila, columna, "agujeroRelleno", 4) {
+AgujeroRelleno::AgujeroRelleno(int fila, int columna, int mapDimension): Item(fila, columna, mapDimension, "agujeroRelleno", 4) {
 
 }
 

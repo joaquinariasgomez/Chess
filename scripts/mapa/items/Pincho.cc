@@ -1,6 +1,6 @@
 #include "Pincho.hh"
 
-Pincho::Pincho(int fila, int columna, int gravedad): gravedad(gravedad), Item(fila, columna, "pincho"+std::to_string(gravedad), 6) {
+Pincho::Pincho(int fila, int columna, int mapDimension, int gravedad): gravedad(gravedad), Item(fila, columna, mapDimension, "pincho"+std::to_string(gravedad), 6) {
 
 }
 

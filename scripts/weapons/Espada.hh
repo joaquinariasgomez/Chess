@@ -3,7 +3,7 @@
 
 class Espada: public Arma {
     public:
-        Espada(int fila, int columna);
+        Espada(int fila, int columna, int mapDimension);
         void draw(sf::RenderWindow& window) const;
         void updatePosition(int fila, int columna);
     private:

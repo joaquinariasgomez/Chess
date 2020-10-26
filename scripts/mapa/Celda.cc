@@ -5,15 +5,15 @@
 #include "items/AgujeroRelleno.hh"
 #include "items/Pincho.hh"
 
-Celda::Celda(int fila, int columna, int itemValor): fila_(fila), columna_(columna), sprite(new SpriteManager(fila, columna, "celda")) {
+Celda::Celda(int fila, int columna, int mapDimension, int itemValor): fila_(fila), columna_(columna), sprite(new SpriteManager(fila, columna, "celda", mapDimension)) {
     switch(itemValor) {
-        case 1: items.push_back(new Pared(fila, columna)); break;
-        case 2: items.push_back(new Roca(fila, columna)); break;
-        case 3: items.push_back(new Agujero(fila, columna)); break;
-        case 4: items.push_back(new AgujeroRelleno(fila, columna)); break;
-        case 6: items.push_back(new Pincho(fila, columna, 1)); break;
-        case 7: items.push_back(new Pincho(fila, columna, 2)); break;
-        case 8: items.push_back(new Pincho(fila, columna, 3)); break;
+        case 1: items.push_back(new Pared(fila, columna, mapDimension)); break;
+        case 2: items.push_back(new Roca(fila, columna, mapDimension)); break;
+        case 3: items.push_back(new Agujero(fila, columna, mapDimension)); break;
+        case 4: items.push_back(new AgujeroRelleno(fila, columna, mapDimension)); break;
+        case 6: items.push_back(new Pincho(fila, columna, mapDimension, 1)); break;
+        case 7: items.push_back(new Pincho(fila, columna, mapDimension, 2)); break;
+        case 8: items.push_back(new Pincho(fila, columna, mapDimension, 3)); break;
         case 0:
         default: items.push_back(NULL);
     }

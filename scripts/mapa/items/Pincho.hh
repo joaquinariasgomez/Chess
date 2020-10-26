@@ -4,7 +4,7 @@
 
 class Pincho: public Item {
     public:
-        Pincho(int fila, int columna, int gravedad);
+        Pincho(int fila, int columna, int mapDimension, int gravedad);
         void draw(sf::RenderWindow& window) const;
         void hurt(Player& player);
         int getGravedad() const {return gravedad;}

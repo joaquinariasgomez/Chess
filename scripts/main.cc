@@ -1,5 +1,4 @@
 #include <iostream>
-//#include "mapa/Mapa.hh"
 #include "mapa/StatusBar.hh"
 #include "mapa/Level.hh"
 #include <SFML/Graphics.hpp>
@@ -7,10 +6,8 @@
 #include "graphics/Window.hh"
 #include "entities/Player.hh"
 
-const int DIM = 6;
 const float MAX_VIDA = 100;
 float Vida::maxVida{MAX_VIDA};
-int Mapa::dimension{DIM};
 
 void draw(sf::RenderWindow& window, Level& level, Player& player) {
     level.draw(window);     // Draw map and entities

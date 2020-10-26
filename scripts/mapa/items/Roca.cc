@@ -1,7 +1,7 @@
 #include "Roca.hh"
 #include "AgujeroRelleno.hh"
 
-Roca::Roca(int fila, int columna): Item(fila, columna, "roca11", 2), spriteState({1,1}) {
+Roca::Roca(int fila, int columna, int mapDimension): Item(fila, columna, mapDimension, "roca11", 2), spriteState({1,1}) {
 
 }
 
@@ -56,7 +56,7 @@ int Roca::checkItem(Level& level, Item* objItem, int desiredFila, int desiredCol
         case 2: // Roca
             return -1;
         case 3: // Agujero
-            level.mapa->celdas[{desiredFila, desiredColumna}]->pushItem(new AgujeroRelleno(desiredFila, desiredColumna));
+            level.mapa->celdas[{desiredFila, desiredColumna}]->pushItem(new AgujeroRelleno(desiredFila, desiredColumna, mapDimension));
             level.mapa->celdas[{fila, columna}]->removeItem(this);
             return 0;
         case 4: // Agujero relleno
@@ -90,7 +90,7 @@ int Roca::moveLeft(Level& level) {
 }
 
 int Roca::moveRight(Level& level) {
-    if(columna == (Mapa::dimension - 1)) return -1;
+    if(columna == (level.mapa->dimension - 1)) return -1;
     // Check wich item is in fila, columna + 1
     Item* objItem = level.mapa->celdas[{fila, columna + 1}]->getLastItem();
     if(objItem == NULL) {
@@ -118,7 +118,7 @@ int Roca::moveUp(Level& level) {
 }
 
 int Roca::moveDown(Level& level) {
-    if(fila == (Mapa::dimension - 1)) return -1;
+    if(fila == (level.mapa->dimension - 1)) return -1;
     // Check wich item is in fila + 1, columna
     Item* objItem = level.mapa->celdas[{fila + 1, columna}]->getLastItem();
     if(objItem == NULL) {

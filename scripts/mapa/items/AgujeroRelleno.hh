@@ -3,6 +3,6 @@
 
 class AgujeroRelleno: public Item {
     public:
-        AgujeroRelleno(int fila, int columna);
+        AgujeroRelleno(int fila, int columna, int mapDimension);
         void draw(sf::RenderWindow& window) const;
 };

@@ -1,6 +1,6 @@
 #include "Espada.hh"
 
-Espada::Espada(int fila, int columna): Arma(fila, columna, "sword", 1), bloodAmount(0) {
+Espada::Espada(int fila, int columna, int mapDimension): Arma(fila, columna, mapDimension, "sword", 1), bloodAmount(0) {
 
 }
 

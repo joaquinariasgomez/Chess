@@ -1,9 +1,10 @@
 #include "Mapa.hh"
 
-Mapa::Mapa(int levelId, ReadState* state): sprite(new SpriteManager(0, 0, "background")) {
+Mapa::Mapa(int levelId, ReadState* state): sprite(new SpriteManager(0, 0, "background", state->getMapDimension())) {
+    dimension = state->getMapDimension();
     for(int i=0; i<dimension; ++i) {
         for(int j=0; j<dimension; ++j) {
-            celdas[{i,j}] = new Celda(i,j,state->getElementFromCelda(i, j));
+            celdas[{i,j}] = new Celda(i,j,dimension,state->getElementFromCelda(i, j));
         }
     }
 }

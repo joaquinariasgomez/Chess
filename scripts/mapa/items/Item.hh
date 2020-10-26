@@ -4,10 +4,11 @@
 
 class Item {
     protected:
-        Item(int fila, int columna, std::string texture, int id): fila(fila), columna(columna), sprite(new SpriteManager(fila, columna, texture)), id(id) {}
+        Item(int fila, int columna, int mapDimension, std::string texture, int id): fila(fila), columna(columna), mapDimension(mapDimension), sprite(new SpriteManager(fila, columna, texture, mapDimension)), id(id) {}
         SpriteManager* sprite;
         int fila;
         int columna;
+        int mapDimension;
     public:
         virtual void draw(sf::RenderWindow& window) const = 0;
         virtual ~Item() {}

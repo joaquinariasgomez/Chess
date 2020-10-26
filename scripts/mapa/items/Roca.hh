@@ -5,7 +5,7 @@
 
 class Roca: public Item {
     public:
-        Roca(int fila, int columna);
+        Roca(int fila, int columna, int mapDimension);
         void draw(sf::RenderWindow& window) const;
         int move(Level& level, std::string direction);
     private:

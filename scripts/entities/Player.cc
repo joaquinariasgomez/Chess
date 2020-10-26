@@ -9,11 +9,11 @@ Player::Player(Level* level): currentArma(0), score(0) {
     std::pair<int, int> coords = level->getState()->getPlayerCoords();
     fila = coords.first;
     columna = coords.second;
-    sprite = new SpriteManager(fila, columna, "player");
+    sprite = new SpriteManager(fila, columna, "player", level->mapa->dimension);
 
     armas.push_back(NULL);
-    armas.push_back(new Espada(fila, columna));
-    armas.push_back(new Escudo(fila, columna));
+    armas.push_back(new Espada(fila, columna, level->mapa->dimension));
+    armas.push_back(new Escudo(fila, columna, level->mapa->dimension));
 
     float startingLife = 75;
     statusBar = new StatusBar(startingLife);
@@ -146,7 +146,7 @@ void Player::checkItem(Level& level, Item* objItem, int desiredFila, int desired
 }
 
 void Player::moveRight(Level& level) {
-    if(columna == (Mapa::dimension - 1)) return;
+    if(columna == (level.mapa->dimension - 1)) return;
     // Check which item is in fila, columna + 1
     Item* objItem = level.mapa->celdas[{fila, columna + 1}]->getLastItem();
     if(objItem == NULL) {
@@ -168,7 +168,7 @@ void Player::moveUp(Level& level) {
 }
 
 void Player::moveDown(Level& level) {
-    if(fila == (Mapa::dimension - 1)) return;
+    if(fila == (level.mapa->dimension - 1)) return;
     // Check which item is in fila + 1, columna
     Item* objItem = level.mapa->celdas[{fila + 1, columna}]->getLastItem();
     if(objItem == NULL) {
