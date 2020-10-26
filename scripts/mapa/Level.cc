@@ -2,6 +2,7 @@
 
 Level::Level(int levelId): levelId(levelId), state(new ReadState()) {
     state->inspectElements(levelId);
+    punteroCeldaObjetivo = state->getObjCoords();
     mapa = new Mapa(levelId, state);
 }
 

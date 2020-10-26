@@ -43,7 +43,7 @@ SpriteManager::SpriteManager(std::string textureName) { // StatusBar
     }
     else {  // Life
         if(textureName == "life") {
-            renderLife(Player::maxVida);
+            renderLife(Vida::maxVida);
         }
         else {
             if(textureName == "noLife") {
@@ -69,7 +69,7 @@ void SpriteManager::renderWeapon(int fila, int columna) {
 }
 
 void SpriteManager::renderLife(float currVida) { // StatusBar
-    float maxVida = Player::maxVida;
+    float maxVida = Vida::maxVida;
 
     texture = TextureLoader::getTexture("life");
     sprite.setTexture(texture);

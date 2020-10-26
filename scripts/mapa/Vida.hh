@@ -8,6 +8,7 @@ class Vida {
         void draw(sf::RenderWindow& window) const;
         void update(float nuevaVida) {vida = nuevaVida; life->updateLife(nuevaVida);}
         float getVida() const {return vida;}
+        static float maxVida;
     private:
         float vida;
         //TODO: More things related to regeneration and poison

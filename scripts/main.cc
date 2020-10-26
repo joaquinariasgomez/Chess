@@ -9,7 +9,7 @@
 
 const int DIM = 6;
 const float MAX_VIDA = 100;
-float Player::maxVida{MAX_VIDA};
+float Vida::maxVida{MAX_VIDA};
 int Mapa::dimension{DIM};
 
 void draw(sf::RenderWindow& window, Level& level, Player& player) {

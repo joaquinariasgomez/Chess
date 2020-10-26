@@ -9,7 +9,6 @@ class Player {
     public:
         Player(Level* level);
         void evaluateEvent(sf::Event event, Level& level);
-        static float maxVida;
         void draw(sf::RenderWindow& window) const;
         void hurt(int damage);
         Arma* getWeapon() const;

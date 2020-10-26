@@ -2,15 +2,21 @@
 
 ReadState::ReadState() {}
 
+std::pair<int, int> ReadState::getObjCoords() const {
+    return objCoords;
+}
+
 void ReadState::inspectElements(int levelId) {
     std::string fileName = "../levels/level"+std::to_string(levelId)+".txt";
     std::ifstream file(fileName);
     char delimiter = ' ';
-    std::string mapKeyword = "mapa";
+    std::string mapKeyword = "mapa:";
+    std::string objetivoKeyword = "objetivo:";
+    std::string esqueletoKeyword = "esqueleto:";
 
     // Find mapKeyword
     bool mapFound = false;
-    int guessedWidthDimension = 0;
+    int guessedWidthDimension = -1;
     std::string line;
     while(std::getline(file, line)) {
         if(mapFound) {
@@ -20,6 +26,16 @@ void ReadState::inspectElements(int levelId) {
         else {
             //if(blablabla) {} Celda objetivo FOUND
             //if(blablabla) {} Esqueleto FOUND
+            if(line.find(objetivoKeyword) != std::string::npos) {
+                // Analizar fila
+                size_t pos = line.find(delimiter);  // Find first delimiter
+                line.erase(0, pos+1);   // Eliminar palabra de la línea
+                size_t newPos = line.find(delimiter);
+                std::string coordX = line.substr(0, newPos);
+                line.erase(0, newPos+1);
+                std::string coordY = line;
+                this->objCoords = {std::stoi(coordX), std::stoi(coordY)};
+            }
             if(line.find(mapKeyword) != std::string::npos) {
                 mapFound = true;
             }
