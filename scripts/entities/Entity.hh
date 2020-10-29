@@ -1,5 +1,5 @@
 #pragma once
-#include "../graphics/SpriteManager.hh"
+#include "../graphics/sprites/SpriteManager.hh"
 #include <SFML/Graphics.hpp>
 
 class Entity {

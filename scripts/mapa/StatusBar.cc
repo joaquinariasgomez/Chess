@@ -1,8 +1,6 @@
 #include "StatusBar.hh"
 
-StatusBar::StatusBar(float startingLife): vida(new Vida(startingLife)), background(new SpriteManager("statusBarBackground")), nolife(new SpriteManager("noLife")), lifeCover(new SpriteManager("lifeCover")) {
-
-}
+StatusBar::StatusBar(float startingLife): vida(new Vida(startingLife)), background(new StatusBarSprite("statusBarBackground", "background")), nolife(new StatusBarSprite("noLife", "noLife")), lifeCover(new StatusBarSprite("lifeCover", "lifeCover")) {}
 
 void StatusBar::draw(sf::RenderWindow& window) const {
     // First draw background

@@ -15,6 +15,8 @@ file(GLOB SOURCES
     "scripts/mapa/items/*.cc"
     "scripts/entities/*.hh"
     "scripts/entities/*.cc"
+    "scripts/graphics/sprites/*.hh"
+    "scripts/graphics/sprites/*.cc"
     "scripts/graphics/*.hh"
     "scripts/graphics/*.cc"
     "scripts/weapons/*.hh"

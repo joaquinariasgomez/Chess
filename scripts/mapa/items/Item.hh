@@ -1,11 +1,11 @@
 #pragma once
-#include "../../graphics/SpriteManager.hh"
+#include "../../graphics/sprites/ItemSprite.hh"
 #include <SFML/Graphics.hpp>
 
 class Item {
     protected:
-        Item(int fila, int columna, int mapDimension, std::string texture, int id): fila(fila), columna(columna), mapDimension(mapDimension), sprite(new SpriteManager(fila, columna, texture, mapDimension)), id(id) {}
-        SpriteManager* sprite;
+        Item(int fila, int columna, int mapDimension, std::string texture, int id): fila(fila), columna(columna), mapDimension(mapDimension), sprite(new ItemSprite(texture, fila, columna, mapDimension)), id(id) {}
+        ItemSprite* sprite;
         int fila;
         int columna;
         int mapDimension;

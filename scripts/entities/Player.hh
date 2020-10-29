@@ -1,5 +1,5 @@
 #pragma once
-#include "../graphics/SpriteManager.hh"
+#include "../graphics/sprites/ItemSprite.hh"
 #include <SFML/Graphics.hpp>
 #include "../mapa/Level.hh"
 #include "../mapa/StatusBar.hh"
@@ -32,7 +32,7 @@ class Player {
         std::vector<Arma*> armas; // 0 -> No arma, 1,2 -> Espada, Escudo
         int fila;
         int columna;
-        SpriteManager* sprite;  //player sprite
+        ItemSprite* sprite;  //player sprite
         StatusBar* statusBar;
         int score;
 };

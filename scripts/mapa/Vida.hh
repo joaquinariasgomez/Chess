@@ -1,5 +1,5 @@
 #pragma once
-#include "../graphics/SpriteManager.hh"
+#include "../graphics/sprites/StatusBarSprite.hh"
 #include <SFML/Graphics.hpp>
 
 class Vida {
@@ -12,5 +12,5 @@ class Vida {
     private:
         float vida;
         //TODO: More things related to regeneration and poison
-        SpriteManager* life;
+        StatusBarSprite* life;
 };

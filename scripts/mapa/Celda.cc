@@ -7,10 +7,10 @@
 
 Celda::Celda(int fila, int columna, int mapDimension, int itemValor, bool objetivo): fila_(fila), columna_(columna) {
     if(objetivo) {
-        sprite = new SpriteManager(fila, columna, "celdaObjetivo", mapDimension);
+        sprite = new ItemSprite("celdaObjetivo", fila, columna, mapDimension);
     }
     else {
-        sprite = new SpriteManager(fila, columna, "celda", mapDimension);
+        sprite = new ItemSprite("celda", fila, columna, mapDimension);
     }
     switch(itemValor) {
         case 1: items.push_back(new Pared(fila, columna, mapDimension)); break;

@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "items/Item.hh"
-#include "../graphics/SpriteManager.hh"
+#include "../graphics/sprites/ItemSprite.hh"
 #include <SFML/Graphics.hpp>
 
 class Celda {
@@ -15,5 +15,5 @@ class Celda {
         int fila_;
         int columna_;
         std::vector<Item*> items;
-        SpriteManager* sprite;
+        ItemSprite* sprite;
 };

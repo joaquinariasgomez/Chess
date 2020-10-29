@@ -9,7 +9,7 @@ Player::Player(Level* level): currentArma(0), score(0) {
     std::pair<int, int> coords = level->getState()->getPlayerCoords();
     fila = coords.first;
     columna = coords.second;
-    sprite = new SpriteManager(fila, columna, "player", level->mapa->dimension);
+    sprite = new ItemSprite("player", fila, columna, level->mapa->dimension);
 
     armas.push_back(NULL);
     armas.push_back(new Espada(fila, columna, level->mapa->dimension));

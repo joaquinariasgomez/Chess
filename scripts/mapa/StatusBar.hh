@@ -1,5 +1,5 @@
 #pragma once
-#include "../graphics/SpriteManager.hh"
+#include "../graphics/sprites/StatusBarSprite.hh"
 #include "Vida.hh"
 #include <SFML/Graphics.hpp>
 
@@ -10,7 +10,7 @@ class StatusBar {
         Vida* getLife() const {return vida;}
     private:
         Vida* vida;
-        SpriteManager* background;
-        SpriteManager* nolife;
-        SpriteManager* lifeCover;
+        StatusBarSprite* background;
+        StatusBarSprite* nolife;
+        StatusBarSprite* lifeCover;
 };

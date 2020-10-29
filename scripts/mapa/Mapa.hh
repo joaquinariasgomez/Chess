@@ -1,7 +1,7 @@
 #pragma once
 #include "Celda.hh"
 #include "ReadState.hh"
-#include "../graphics/SpriteManager.hh"
+#include "../graphics/sprites/BackgroundSprite.hh"
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <utility>
@@ -14,5 +14,5 @@ class Mapa {
         std::map<std::pair<int, int>, Celda*> celdas;
         int dimension;
     private:   
-        SpriteManager* sprite;  //background sprite
+        BackgroundSprite* sprite;  //background sprite
 };

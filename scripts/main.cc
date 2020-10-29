@@ -2,7 +2,7 @@
 #include "mapa/StatusBar.hh"
 #include "mapa/Level.hh"
 #include <SFML/Graphics.hpp>
-#include "graphics/SpriteManager.hh"
+#include "graphics/sprites/SpriteManager.hh"
 #include "graphics/Window.hh"
 #include "entities/Player.hh"
 

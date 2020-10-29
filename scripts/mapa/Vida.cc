@@ -1,6 +1,6 @@
 #include "Vida.hh"
 
-Vida::Vida(float value): vida(value), life(new SpriteManager("life")) {
+Vida::Vida(float value): vida(value), life(new StatusBarSprite("life", "life")) {
     life->updateLife(value);
 }
 

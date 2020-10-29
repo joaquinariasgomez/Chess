@@ -1,6 +1,6 @@
 #include "Mapa.hh"
 
-Mapa::Mapa(int levelId, ReadState* state, std::pair<int, int> punteroCeldaObjetivo): sprite(new SpriteManager(0, 0, "background", state->getMapDimension())) {
+Mapa::Mapa(int levelId, ReadState* state, std::pair<int, int> punteroCeldaObjetivo): sprite(new BackgroundSprite("background")) {
     dimension = state->getMapDimension();
     for(int i=0; i<dimension; ++i) {
         for(int j=0; j<dimension; ++j) {
