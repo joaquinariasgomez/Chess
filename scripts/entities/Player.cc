@@ -157,9 +157,11 @@ void Player::checkItem(Level& level, Item* objItem, int desiredFila, int desired
 }
 
 void Player::attackRight(Level& level) {
-    // Check if is there some entity
     if(level.hasEntity(fila, columna + 1)) {
-        level.hurtEntity(fila, columna + 1, 30);
+        bool killedEntity = level.hurtEntity(fila, columna + 1, 30);
+        if(killedEntity) {
+            dynamic_cast<Espada*>(armas[currentArma])->increaseBloodAmount();
+        }
     }
 }
 

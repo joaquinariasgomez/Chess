@@ -35,10 +35,19 @@ bool Level::hasEntity(int desiredFila, int desiredCol) const {
     return result;
 }
 
-void Level::hurtEntity(int desiredFila, int desiredCol, float damage) {
+bool Level::hurtEntity(int desiredFila, int desiredCol, float damage) {
+    bool killedEntity = false;
+    
+    std::vector<Entity*>::iterator it = entities.begin();
     for(auto const& entity: entities) {
         if(entity->fila == desiredFila && entity->columna == desiredCol) {
             entity->hurt(damage);
+            if(entity->isDead()) {
+                entities.erase(it);
+                killedEntity = true;
+            }
         }
+        ++it;
     }
+    return killedEntity;
 }

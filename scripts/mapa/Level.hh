@@ -11,7 +11,7 @@ class Level {
         std::pair<int, int> getPunteroCeldaObjetivo() const {return punteroCeldaObjetivo;}
 
         bool hasEntity(int desiredFila, int desiredCol) const;
-        void hurtEntity(int desiredFila, int desiredCol, float damage);
+        bool hurtEntity(int desiredFila, int desiredCol, float damage);
 
         Mapa* mapa; // Map of the level
     private:

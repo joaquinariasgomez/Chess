@@ -12,6 +12,7 @@ class Entity {
         int fila;
         int columna;
         virtual void draw(sf::RenderWindow& window) const = 0;
-        virtual ~Entity() {}
         virtual void hurt(float damage) = 0;
+        virtual bool isDead() const = 0;
+        virtual ~Entity() {}
 };

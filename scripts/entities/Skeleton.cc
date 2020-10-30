@@ -16,8 +16,8 @@ void Skeleton::hurt(float damage) {
     }
     // Update texture according to vida
     //
-    if(vida == 0) {
-        // Skeleton dies
-    }
-    std::cout << "OUCH!! mi vida: " << vida << std::endl;
+}
+
+bool Skeleton::isDead() const {
+    return vida == 0;
 }
