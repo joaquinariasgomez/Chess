@@ -21,7 +21,7 @@ void Level::draw(sf::RenderWindow& window) const {
 void Level::initiateSkeletons(std::vector<std::pair<int, int>> skeletonCoords) {    // For every skeleton found, give it 100 life
     int mapDimension = mapa->dimension;
     for(auto const& skeletonCoord: skeletonCoords) {
-        entities.push_back(new Skeleton(100, skeletonCoord.first, skeletonCoord.second, mapDimension));
+        entities.push_back(new Skeleton(90, skeletonCoord.first, skeletonCoord.second, mapDimension));
     }
 }
 
@@ -33,4 +33,12 @@ bool Level::hasEntity(int desiredFila, int desiredCol) const {
         }
     }
     return result;
+}
+
+void Level::hurtEntity(int desiredFila, int desiredCol, float damage) {
+    for(auto const& entity: entities) {
+        if(entity->fila == desiredFila && entity->columna == desiredCol) {
+            entity->hurt(damage);
+        }
+    }
 }

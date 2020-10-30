@@ -1,4 +1,5 @@
 #include "Skeleton.hh"
+#include <iostream>
 
 Skeleton::Skeleton(float vida, int fila, int columna, int mapDimension): Entity(vida, "skeleton", fila, columna, mapDimension) {
 
@@ -18,4 +19,5 @@ void Skeleton::hurt(float damage) {
     if(vida == 0) {
         // Skeleton dies
     }
+    std::cout << "OUCH!! mi vida: " << vida << std::endl;
 }

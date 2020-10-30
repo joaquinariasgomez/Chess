@@ -21,6 +21,7 @@ class Player {
         void evaluateRight(Level& level);
         void evaluateUp(Level& level);
         void evaluateDown(Level& level);
+        void attackRight(Level& level);
 
         void updateSpritePosition();
         void checkItem(Level& level, Item* objItem, int desiredFila, int desiredColumna);

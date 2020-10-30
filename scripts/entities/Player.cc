@@ -56,7 +56,9 @@ void Player::evaluateLeft(Level& level) {
 void Player::evaluateRight(Level& level) {
     if(currentArma == 0) moveRight(level);
     if(currentArma == 1) // Espada
-        {}//attackRight();
+    {
+        attackRight(level);
+    }
     if(currentArma == 2) // Escudo
         {}//defendRight();
 }
@@ -151,6 +153,13 @@ void Player::checkItem(Level& level, Item* objItem, int desiredFila, int desired
             updateSpritePosition();
             dynamic_cast<Pincho*>(objItem)->hurt(*this);
         default: break;
+    }
+}
+
+void Player::attackRight(Level& level) {
+    // Check if is there some entity
+    if(level.hasEntity(fila, columna + 1)) {
+        level.hurtEntity(fila, columna + 1, 30);
     }
 }
 
