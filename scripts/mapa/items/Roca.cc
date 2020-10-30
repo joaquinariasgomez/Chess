@@ -77,6 +77,8 @@ void Roca::updateSpritePosition() {
 
 int Roca::moveLeft(Level& level) {
     if(columna == 0) return -1;
+    // Check if level has entities in desiredPosition
+    if(level.hasEntity(fila, columna - 1)) return -1;
     // Check wich item is in fila, columna - 1
     Item* objItem = level.mapa->celdas[{fila, columna - 1}]->getLastItem();
     if(objItem == NULL) {
@@ -91,6 +93,8 @@ int Roca::moveLeft(Level& level) {
 
 int Roca::moveRight(Level& level) {
     if(columna == (level.mapa->dimension - 1)) return -1;
+    // Check if level has entities in desiredPosition
+    if(level.hasEntity(fila, columna + 1)) return -1;
     // Check wich item is in fila, columna + 1
     Item* objItem = level.mapa->celdas[{fila, columna + 1}]->getLastItem();
     if(objItem == NULL) {
@@ -105,6 +109,8 @@ int Roca::moveRight(Level& level) {
 
 int Roca::moveUp(Level& level) {
     if(fila == 0) return -1;
+    // Check if level has entities in desiredPosition
+    if(level.hasEntity(fila - 1, columna)) return -1;
     // Check wich item is in fila - 1, columna
     Item* objItem = level.mapa->celdas[{fila - 1, columna}]->getLastItem();
     if(objItem == NULL) {
@@ -119,6 +125,8 @@ int Roca::moveUp(Level& level) {
 
 int Roca::moveDown(Level& level) {
     if(fila == (level.mapa->dimension - 1)) return -1;
+    // Check if level has entities in desiredPosition
+    if(level.hasEntity(fila + 1, columna)) return -1;
     // Check wich item is in fila + 1, columna
     Item* objItem = level.mapa->celdas[{fila + 1, columna}]->getLastItem();
     if(objItem == NULL) {

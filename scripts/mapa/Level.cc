@@ -24,3 +24,13 @@ void Level::initiateSkeletons(std::vector<std::pair<int, int>> skeletonCoords) {
         entities.push_back(new Skeleton(100, skeletonCoord.first, skeletonCoord.second, mapDimension));
     }
 }
+
+bool Level::hasEntity(int desiredFila, int desiredCol) const {
+    bool result = false;
+    for(auto const& entity: entities) {
+        if(entity->fila == desiredFila && entity->columna == desiredCol) {
+            result = true;
+        }
+    }
+    return result;
+}

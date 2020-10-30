@@ -156,6 +156,8 @@ void Player::checkItem(Level& level, Item* objItem, int desiredFila, int desired
 
 void Player::moveRight(Level& level) {
     if(columna == (level.mapa->dimension - 1)) return;
+    // Check if level has entities in desiredPosition
+    if(level.hasEntity(fila, columna + 1)) return;
     // Check which item is in fila, columna + 1
     Item* objItem = level.mapa->celdas[{fila, columna + 1}]->getLastItem();
     if(objItem == NULL) {
@@ -167,6 +169,8 @@ void Player::moveRight(Level& level) {
 
 void Player::moveUp(Level& level) {
     if(fila == 0) return;
+    // Check if level has entities in desiredPosition
+    if(level.hasEntity(fila - 1, columna)) return;
     // Check which item is in fila - 1, columna
     Item* objItem = level.mapa->celdas[{fila - 1, columna}]->getLastItem();
     if(objItem == NULL) {
@@ -178,6 +182,8 @@ void Player::moveUp(Level& level) {
 
 void Player::moveDown(Level& level) {
     if(fila == (level.mapa->dimension - 1)) return;
+    // Check if level has entities in desiredPosition
+    if(level.hasEntity(fila + 1, columna)) return;
     // Check which item is in fila + 1, columna
     Item* objItem = level.mapa->celdas[{fila + 1, columna}]->getLastItem();
     if(objItem == NULL) {
@@ -189,6 +195,8 @@ void Player::moveDown(Level& level) {
 
 void Player::moveLeft(Level& level) {
     if(columna == 0) return;
+    // Check if level has entities in desiredPosition
+    if(level.hasEntity(fila, columna - 1)) return;
     // Check which item is in fila, columna - 1
     Item* objItem = level.mapa->celdas[{fila, columna - 1}]->getLastItem();
     if(objItem == NULL) {
