@@ -1,6 +1,6 @@
 #include "Escudo.hh"
 
-Escudo::Escudo(int fila, int columna, int mapDimension): Arma(fila, columna, mapDimension, "escudo", 2) {
+Escudo::Escudo(int fila, int columna, int mapDimension): Arma(fila, columna, mapDimension, "shield", 2) {
 
 }
 
