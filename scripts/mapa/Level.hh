@@ -15,4 +15,6 @@ class Level {
         std::vector<Entity*> entities;  // Possible entities in a level
         std::pair<int, int> punteroCeldaObjetivo;   // Celda objetivo para pasar al siguiente nivel
         ReadState* state;
+        //
+        void initiateSkeletons(std::vector<std::pair<int, int>> skeletonCoords);
 };

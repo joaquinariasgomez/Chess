@@ -22,11 +22,13 @@ Player::Player(Level* level): currentArma(0), score(0) {
 void Player::draw(sf::RenderWindow& window) const {
     window.draw(sprite->getSprite());   // Player sprite
     if(getWeapon() != NULL) {getWeapon()->draw(window);}  // Draw weapon
-    statusBar->draw(window);
+    statusBar->draw(window);    // StatusBar
 }
 
-void Player::hurt(int damage) {
-    float vida = statusBar->getLife()->getVida();
+float Player::getVida() const {return statusBar->getLife()->getVida();}
+
+void Player::hurt(float damage) {
+    float vida = this->getVida();
     vida -= damage;
     if(vida < 0) {
         vida = 0;

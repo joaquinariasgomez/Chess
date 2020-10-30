@@ -6,6 +6,10 @@ std::pair<int, int> ReadState::getObjCoords() const {
     return objCoords;
 }
 
+std::vector<std::pair<int, int>> ReadState::getSkeletonCoords() const {
+    return skeletonCoords;
+}
+
 void ReadState::inspectElements(int levelId) {
     std::string fileName = "../levels/level"+std::to_string(levelId)+".txt";
     std::ifstream file(fileName);
@@ -25,7 +29,18 @@ void ReadState::inspectElements(int levelId) {
             break;
         }
         else {
-            //if(blablabla) {} Esqueleto FOUND
+            if(line.find(esqueletoKeyword) != std::string::npos) {
+                // Analizar fila
+                size_t pos = line.find(delimiter);  // Find first delimiter
+                line.erase(0, pos+1);   // Eliminar palabra de la línea
+                size_t newPos = line.find(delimiter);
+                std::string coordX = line.substr(0, newPos);
+                line.erase(0, newPos+1);
+                std::string coordY = line;
+                std::pair<int,int> skeletonCoord = {std::stoi(coordX), std::stoi(coordY)};
+                skeletonCoords.push_back(skeletonCoord);
+                continue;
+            }
             if(line.find(objetivoKeyword) != std::string::npos) {
                 // Analizar fila
                 size_t pos = line.find(delimiter);  // Find first delimiter

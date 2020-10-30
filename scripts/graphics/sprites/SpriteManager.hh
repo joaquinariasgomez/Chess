@@ -1,7 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-//#include "../TextureLoader.hh"
-//#include "../../mapa/Mapa.hh"
 
 class SpriteManager {
     protected:

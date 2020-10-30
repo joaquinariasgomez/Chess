@@ -10,7 +10,7 @@ class Player {
         Player(Level* level);
         void evaluateEvent(sf::Event event, Level& level);
         void draw(sf::RenderWindow& window) const;
-        void hurt(int damage);
+        void hurt(float damage);
         Arma* getWeapon() const;
     private:
         void moveLeft(Level& level);
@@ -25,6 +25,7 @@ class Player {
         void updateSpritePosition();
         void checkItem(Level& level, Item* objItem, int desiredFila, int desiredColumna);
         void changeWeapon();
+        float getVida() const;
         
         void checkCeldaObjetivo(Level& level) const;
         void die();
