@@ -35,7 +35,6 @@ void Player::hurt(float damage) {
     }
     statusBar->getLife()->update(vida);
     if(vida == 0) {
-        // Player dies
         die();
     }
 }
@@ -48,7 +47,9 @@ void Player::die() {
 void Player::evaluateLeft(Level& level) {
     if(currentArma == 0) moveLeft(level);
     if(currentArma == 1) // Espada
-        {}//attackLeft();
+    {
+        attackLeft(level);
+    }
     if(currentArma == 2) // Escudo
         {}//defendLeft();
 }
@@ -66,7 +67,9 @@ void Player::evaluateRight(Level& level) {
 void Player::evaluateUp(Level& level) {
     if(currentArma == 0) moveUp(level);
     if(currentArma == 1) // Espada
-        {}//attackUp();
+    {
+        attackUp(level);
+    }
     if(currentArma == 2) // Escudo
         {}//defendUp();
 }
@@ -74,7 +77,9 @@ void Player::evaluateUp(Level& level) {
 void Player::evaluateDown(Level& level) {
     if(currentArma == 0) moveDown(level);
     if(currentArma == 1) // Espada
-        {}//attackDown();
+    {
+        attackDown(level);
+    }
     if(currentArma == 2) // Escudo
         {}//defendDown();
 }
@@ -159,6 +164,33 @@ void Player::checkItem(Level& level, Item* objItem, int desiredFila, int desired
 void Player::attackRight(Level& level) {
     if(level.hasEntity(fila, columna + 1)) {
         bool killedEntity = level.hurtEntity(fila, columna + 1, 30);
+        if(killedEntity) {
+            dynamic_cast<Espada*>(armas[currentArma])->increaseBloodAmount();
+        }
+    }
+}
+
+void Player::attackLeft(Level& level) {
+    if(level.hasEntity(fila, columna - 1)) {
+        bool killedEntity = level.hurtEntity(fila, columna - 1, 30);
+        if(killedEntity) {
+            dynamic_cast<Espada*>(armas[currentArma])->increaseBloodAmount();
+        }
+    }
+}
+
+void Player::attackUp(Level& level) {
+    if(level.hasEntity(fila - 1, columna)) {
+        bool killedEntity = level.hurtEntity(fila - 1, columna, 30);
+        if(killedEntity) {
+            dynamic_cast<Espada*>(armas[currentArma])->increaseBloodAmount();
+        }
+    }
+}
+
+void Player::attackDown(Level& level) {
+    if(level.hasEntity(fila + 1, columna)) {
+        bool killedEntity = level.hurtEntity(fila + 1, columna, 30);
         if(killedEntity) {
             dynamic_cast<Espada*>(armas[currentArma])->increaseBloodAmount();
         }
