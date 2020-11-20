@@ -7,27 +7,33 @@
 
 class Player {
     public:
+        enum EventType {
+            NONE,
+            MOVE,
+            CHANGE_WEAPON,
+            ATTACK_DEFEND
+        };
         Player(Level* level);
-        void evaluateEvent(sf::Event event, Level& level);
+        EventType evaluateEvent(sf::Event event, Level& level);
         void draw(sf::RenderWindow& window) const;
         void hurt(float damage);
         Arma* getWeapon() const;
     private:
-        void moveLeft(Level& level);
-        void moveRight(Level& level);
-        void moveUp(Level& level);
-        void moveDown(Level& level);
-        void evaluateLeft(Level& level);
-        void evaluateRight(Level& level);
-        void evaluateUp(Level& level);
-        void evaluateDown(Level& level);
+        bool moveLeft(Level& level);
+        bool moveRight(Level& level);
+        bool moveUp(Level& level);
+        bool moveDown(Level& level);
+        EventType evaluateLeft(Level& level);
+        EventType evaluateRight(Level& level);
+        EventType evaluateUp(Level& level);
+        EventType evaluateDown(Level& level);
         void attackRight(Level& level);
         void attackLeft(Level& level);
         void attackUp(Level& level);
         void attackDown(Level& level);
 
         void updateSpritePosition();
-        void checkItem(Level& level, Item* objItem, int desiredFila, int desiredColumna);
+        bool checkItem(Level& level, Item* objItem, int desiredFila, int desiredColumna);
         void changeWeapon();
         float getVida() const;
         

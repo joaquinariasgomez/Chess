@@ -51,3 +51,9 @@ bool Level::hurtEntity(int desiredFila, int desiredCol, float damage) {
     }
     return killedEntity;
 }
+
+void Level::updateEntities() {
+    for(auto const& entity: entities) {
+        entity->update();
+    }
+}

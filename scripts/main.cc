@@ -32,7 +32,10 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
             if (event.type == sf::Event::EventType::KeyPressed){
-                player.evaluateEvent(event, currentLevel);
+                int eventType = player.evaluateEvent(event, currentLevel);
+                if(eventType == Player::EventType::MOVE) {
+                    currentLevel.updateEntities();
+                }
             }
         }
 

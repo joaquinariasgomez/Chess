@@ -14,5 +14,6 @@ class Entity {
         virtual void draw(sf::RenderWindow& window) const = 0;
         virtual void hurt(float damage) = 0;
         virtual bool isDead() const = 0;
+        virtual void update() = 0;
         virtual ~Entity() {}
 };

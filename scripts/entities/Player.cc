@@ -44,44 +44,80 @@ void Player::die() {
     std::cout << "Score: " << score << std::endl;
 }
 
-void Player::evaluateLeft(Level& level) {
-    if(currentArma == 0) moveLeft(level);
+Player::EventType Player::evaluateLeft(Level& level) {
+    Player::EventType eventType = Player::EventType::NONE;
+    if(currentArma == 0) {
+        if(moveLeft(level)) {
+            eventType = Player::EventType::MOVE;
+        }
+    }
     if(currentArma == 1) // Espada
     {
         attackLeft(level);
+        eventType = Player::EventType::ATTACK_DEFEND;
     }
     if(currentArma == 2) // Escudo
-        {}//defendLeft();
+    {
+        eventType = Player::EventType::ATTACK_DEFEND;
+    }//defendLeft();
+    return eventType;
 }
 
-void Player::evaluateRight(Level& level) {
-    if(currentArma == 0) moveRight(level);
+Player::EventType Player::evaluateRight(Level& level) {
+    Player::EventType eventType = Player::EventType::NONE;
+    if(currentArma == 0) {
+        if(moveRight(level)) {
+            eventType = Player::EventType::MOVE;
+        }
+    }
     if(currentArma == 1) // Espada
     {
         attackRight(level);
+        eventType = Player::EventType::ATTACK_DEFEND;
     }
     if(currentArma == 2) // Escudo
-        {}//defendRight();
+    {
+        eventType = Player::EventType::ATTACK_DEFEND;
+    }//defendRight();
+    return eventType;
 }
 
-void Player::evaluateUp(Level& level) {
-    if(currentArma == 0) moveUp(level);
+Player::EventType Player::evaluateUp(Level& level) {
+    Player::EventType eventType = Player::EventType::NONE;
+    if(currentArma == 0) {
+        if(moveUp(level)) {
+            eventType = Player::EventType::MOVE;
+        }
+    }
     if(currentArma == 1) // Espada
     {
         attackUp(level);
+        eventType = Player::EventType::ATTACK_DEFEND;
     }
     if(currentArma == 2) // Escudo
-        {}//defendUp();
+    {
+        eventType = Player::EventType::ATTACK_DEFEND;
+    }//defendUp();
+    return eventType;
 }
 
-void Player::evaluateDown(Level& level) {
-    if(currentArma == 0) moveDown(level);
+Player::EventType Player::evaluateDown(Level& level) {
+    Player::EventType eventType = Player::EventType::NONE;
+    if(currentArma == 0) {
+        if(moveDown(level)) {
+            eventType = Player::EventType::MOVE;
+        }
+    }
     if(currentArma == 1) // Espada
     {
         attackDown(level);
+        eventType = Player::EventType::ATTACK_DEFEND;
     }
     if(currentArma == 2) // Escudo
-        {}//defendDown();
+    {
+        eventType = Player::EventType::ATTACK_DEFEND;
+    }//defendDown();
+    return eventType;
 }
 
 void Player::checkCeldaObjetivo(Level& level) const {
@@ -90,23 +126,26 @@ void Player::checkCeldaObjetivo(Level& level) const {
     }
 }
 
-void Player::evaluateEvent(sf::Event event, Level& level) {
+Player::EventType Player::evaluateEvent(sf::Event event, Level& level) {
+    Player::EventType eventType = Player::EventType::NONE;
     if (event.key.code == sf::Keyboard::Left){
-        evaluateLeft(level);
+        eventType = evaluateLeft(level);
     }
     if (event.key.code == sf::Keyboard::Right){
-        evaluateRight(level);
+        eventType = evaluateRight(level);
     }
     if (event.key.code == sf::Keyboard::Up){
-        evaluateUp(level);
+        eventType = evaluateUp(level);
     }
     if (event.key.code == sf::Keyboard::Down){
-        evaluateDown(level);
+        eventType = evaluateDown(level);
     }
     if (event.key.code == sf::Keyboard::A) {
         changeWeapon();
+        eventType = Player::EventType::CHANGE_WEAPON;
     }
     checkCeldaObjetivo(level);
+    return eventType;
 }
 
 void Player::changeWeapon() {
@@ -132,11 +171,13 @@ std::string guessDirection(int currFila, int currCol, int objFila, int objCol) {
     return "";
 }
 
-void Player::checkItem(Level& level, Item* objItem, int desiredFila, int desiredColumna) {
+bool Player::checkItem(Level& level, Item* objItem, int desiredFila, int desiredColumna) {
+    bool canMove = true;
     std::string direction = guessDirection(fila, columna, desiredFila, desiredColumna);
     // Examinar item
     switch(objItem->id) {
         case 1: // Pared
+            canMove = false;
             break;
         case 2: // Roca
             if(dynamic_cast<Roca*>(objItem)->move(level, direction) != -1) {    // Returns -1 if it cannot move the rock
@@ -144,8 +185,12 @@ void Player::checkItem(Level& level, Item* objItem, int desiredFila, int desired
                 columna = desiredColumna;
                 updateSpritePosition();
             }
+            else {
+                canMove = false;
+            }
             break;
         case 3: // Agujero
+            canMove = false;
             break;
         case 4: // Agujero relleno
             fila = desiredFila;
@@ -159,6 +204,7 @@ void Player::checkItem(Level& level, Item* objItem, int desiredFila, int desired
             dynamic_cast<Pincho*>(objItem)->hurt(*this);
         default: break;
     }
+    return canMove;
 }
 
 void Player::attackRight(Level& level) {
@@ -197,54 +243,70 @@ void Player::attackDown(Level& level) {
     }
 }
 
-void Player::moveRight(Level& level) {
-    if(columna == (level.mapa->dimension - 1)) return;
+bool Player::moveRight(Level& level) {
+    if(columna == (level.mapa->dimension - 1)) return false;
     // Check if level has entities in desiredPosition
-    if(level.hasEntity(fila, columna + 1)) return;
+    if(level.hasEntity(fila, columna + 1)) return false;
+    bool canMove = true;
     // Check which item is in fila, columna + 1
     Item* objItem = level.mapa->celdas[{fila, columna + 1}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
         columna++;
         updateSpritePosition();
-    } else checkItem(level, objItem, fila, columna + 1);
+    } else {
+        canMove = checkItem(level, objItem, fila, columna + 1);
+    }
+    return canMove;
 }
 
-void Player::moveUp(Level& level) {
-    if(fila == 0) return;
+bool Player::moveUp(Level& level) {
+    if(fila == 0) return false;
     // Check if level has entities in desiredPosition
-    if(level.hasEntity(fila - 1, columna)) return;
+    if(level.hasEntity(fila - 1, columna)) return false;
+    bool canMove = true;
     // Check which item is in fila - 1, columna
     Item* objItem = level.mapa->celdas[{fila - 1, columna}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
         fila--;
         updateSpritePosition();
-    } else checkItem(level, objItem, fila - 1, columna);
+    } else {
+        canMove = checkItem(level, objItem, fila - 1, columna);
+    }
+    return canMove;
 }
 
-void Player::moveDown(Level& level) {
-    if(fila == (level.mapa->dimension - 1)) return;
+bool Player::moveDown(Level& level) {
+    if(fila == (level.mapa->dimension - 1)) return false;
     // Check if level has entities in desiredPosition
-    if(level.hasEntity(fila + 1, columna)) return;
+    if(level.hasEntity(fila + 1, columna)) return false;
+    bool canMove = true;
     // Check which item is in fila + 1, columna
     Item* objItem = level.mapa->celdas[{fila + 1, columna}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
         fila++;
         updateSpritePosition();
-    } else checkItem(level, objItem, fila + 1, columna);
+    } else {
+        canMove = checkItem(level, objItem, fila + 1, columna);
+    }
+    return canMove;
 }
 
-void Player::moveLeft(Level& level) {
-    if(columna == 0) return;
+bool Player::moveLeft(Level& level) {
+    if(columna == 0) return false;
     // Check if level has entities in desiredPosition
-    if(level.hasEntity(fila, columna - 1)) return;
+    if(level.hasEntity(fila, columna - 1)) return false;
+    bool canMove = true;
     // Check which item is in fila, columna - 1
     Item* objItem = level.mapa->celdas[{fila, columna - 1}]->getLastItem();
     if(objItem == NULL) {
         // Mover con normalidad
         columna--;
         updateSpritePosition();
-    } else checkItem(level, objItem, fila, columna - 1);
+    } else {
+        canMove = checkItem(level, objItem, fila, columna - 1);
+    }
+    return canMove;
 }

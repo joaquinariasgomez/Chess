@@ -13,6 +13,8 @@ class Level {
         bool hasEntity(int desiredFila, int desiredCol) const;
         bool hurtEntity(int desiredFila, int desiredCol, float damage);
 
+        void updateEntities();
+
         Mapa* mapa; // Map of the level
     private:
         int levelId;
