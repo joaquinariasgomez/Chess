@@ -31,7 +31,7 @@ void Skeleton::update(Player& player) {
 
 void Skeleton::attackIfPlayerIsClose(Player& player) {
     if(isGoingToAttack) {
-        performAttack();    //Should attack in a certain direction
+        performAttack();
     }
     else {
         if(playerIsClose(player)) {
@@ -42,7 +42,7 @@ void Skeleton::attackIfPlayerIsClose(Player& player) {
 }
 
 void Skeleton::performAttack() {
-    std::cout << "ATACANDO" << std::endl;
+    std::cout << "ATACANDO " << attackDirection << std::endl;
     isGoingToAttack = false;
 }
 
@@ -55,7 +55,7 @@ Skeleton::AttackDirection Skeleton::guessAttackDirection(Player& player) {
     if(fila - 1 == player.getFila() && columna == player.getColumna()) {
         attackDirection = Skeleton::AttackDirection::UP;
     }
-    if(fila - 1 == player.getFila() && columna == player.getColumna()) {
+    if(fila + 1 == player.getFila() && columna == player.getColumna()) {
         attackDirection = Skeleton::AttackDirection::DOWN;
     }
     if(columna - 1 == player.getColumna() && fila == player.getFila()) {
