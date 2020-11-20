@@ -156,6 +156,10 @@ Arma* Player::getWeapon() const {
     return armas[currentArma];
 }
 
+int Player::getFila() const {return fila;}
+
+int Player::getColumna() const {return columna;}
+
 void Player::updateSpritePosition() {
     sprite->updatePosition(fila, columna);
     for(auto arma: armas) {

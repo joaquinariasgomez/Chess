@@ -18,6 +18,8 @@ class Player {
         void draw(sf::RenderWindow& window) const;
         void hurt(float damage);
         Arma* getWeapon() const;
+        int getFila() const;
+        int getColumna() const;
     private:
         bool moveLeft(Level& level);
         bool moveRight(Level& level);
