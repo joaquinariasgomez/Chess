@@ -7,7 +7,7 @@ class Skeleton: public Entity {
         void draw(sf::RenderWindow& window) const;
         void hurt(float damage);
         bool isDead() const;
-        void update();
+        void update(Player& player);
         // Cada vez que mueva, pasarle la referencia de Jugador para saber a dónde dirigirse y a
         // quien atacar en caso de modificar ese objeto, similar a Roca.hh/.cc
     private:

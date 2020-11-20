@@ -3,6 +3,8 @@
 #include "../entities/Entity.hh"
 #include "ReadState.hh"
 
+class Player;
+
 class Level {
     public:
         Level(int levelId);
@@ -13,7 +15,7 @@ class Level {
         bool hasEntity(int desiredFila, int desiredCol) const;
         bool hurtEntity(int desiredFila, int desiredCol, float damage);
 
-        void updateEntities();
+        void updateEntities(Player& player);
 
         Mapa* mapa; // Map of the level
     private:

@@ -34,7 +34,7 @@ int main() {
             if (event.type == sf::Event::EventType::KeyPressed){
                 int eventType = player.evaluateEvent(event, currentLevel);
                 if(eventType == Player::EventType::MOVE) {
-                    currentLevel.updateEntities();
+                    currentLevel.updateEntities(player);
                 }
             }
         }

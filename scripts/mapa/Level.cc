@@ -1,4 +1,5 @@
 #include "Level.hh"
+#include "../entities/Player.hh"
 #include "../entities/Skeleton.hh"
 
 Level::Level(int levelId): levelId(levelId), state(new ReadState()) {
@@ -52,8 +53,8 @@ bool Level::hurtEntity(int desiredFila, int desiredCol, float damage) {
     return killedEntity;
 }
 
-void Level::updateEntities() {
+void Level::updateEntities(Player& player) {
     for(auto const& entity: entities) {
-        entity->update();
+        entity->update(player);
     }
 }
