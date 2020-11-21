@@ -33,7 +33,7 @@ int main() {
                 window.close();
             if (event.type == sf::Event::EventType::KeyPressed){
                 int eventType = player.evaluateEvent(event, currentLevel);
-                if(eventType == Player::EventType::MOVE) {
+                if(eventType == Player::EventType::MOVE || eventType == Player::EventType::ATTACK_DEFEND) {
                     currentLevel.updateEntities(player);
                 }
             }

@@ -11,6 +11,7 @@ class Celda {
         Item* getLastItem() const {return items.back();}
         void pushItem(Item* item) {items.push_back(item);}
         void removeItem(Item* item);
+        void updateSpriteTexture(std::string textureName);
     private:
         int fila_;
         int columna_;

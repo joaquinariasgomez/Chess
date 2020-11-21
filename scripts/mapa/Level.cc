@@ -55,6 +55,6 @@ bool Level::hurtEntity(int desiredFila, int desiredCol, float damage) {
 
 void Level::updateEntities(Player& player) {
     for(auto const& entity: entities) {
-        entity->update(player);
+        entity->update(player, *mapa);
     }
 }

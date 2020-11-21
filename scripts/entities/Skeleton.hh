@@ -14,17 +14,21 @@ class Skeleton: public Entity {
         void draw(sf::RenderWindow& window) const;
         void hurt(float damage);
         bool isDead() const;
-        void update(Player& player);
-        // Cada vez que mueva, pasarle la referencia de Jugador para saber a dónde dirigirse y a
-        // quien atacar en caso de modificar ese objeto, similar a Roca.hh/.cc
+        void update(Player& player, Mapa& mapa);
     private:
         ItemSprite* isGoingToAttackSprite;
         bool isGoingToAttack;
         bool isAttacking; //Esto debería pintar las celdas que sean atacadas con una textura
         AttackDirection attackDirection;
+        const int ATTACK_SPEED = 2;
+        int currentTimeWithoutAttacking;
 
-        void attackIfPlayerIsClose(Player& player);
-        void performAttack();
+        void attackIfPlayerIsClose(Player& player, Mapa& mapa);
+        void performAttack(Mapa& mapa, Player& player);
+        void updateTextureFromCeldas(Mapa& mapa, Player& player);
+        void resetTextureFromCeldas(Mapa& mapa);
+        void resetTextureFromCelda(Mapa& mapa, int objFila, int objCol);
+        void updateTextureFromCeldaAndHurtPlayer(Mapa& mapa, Player& player, int objFila, int objCol);
         bool playerIsClose(Player& player);
         AttackDirection guessAttackDirection(Player& player);
 };

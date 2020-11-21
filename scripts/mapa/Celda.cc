@@ -47,3 +47,7 @@ void Celda::draw(sf::RenderWindow& window) const {
         }
     }
 }
+
+void Celda::updateSpriteTexture(std::string textureName) {
+    this->sprite->updateTexture(textureName);
+}
