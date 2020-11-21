@@ -13,6 +13,7 @@ class Skeleton: public Entity {
         Skeleton(float vida, int fila, int columna, int mapDimension);
         void draw(sf::RenderWindow& window) const;
         void hurt(float damage);
+        void die();
         bool isDead() const;
         void update(Player& player, Mapa& mapa);
     private:
@@ -20,15 +21,18 @@ class Skeleton: public Entity {
         bool isGoingToAttack;
         bool isAttacking; //Esto debería pintar las celdas que sean atacadas con una textura
         AttackDirection attackDirection;
+        AttackDirection lastAttackDirection;
         const int ATTACK_SPEED = 2;
         int currentTimeWithoutAttacking;
 
         void attackIfPlayerIsClose(Player& player, Mapa& mapa);
         void performAttack(Mapa& mapa, Player& player);
         void updateTextureFromCeldas(Mapa& mapa, Player& player);
-        void resetTextureFromCeldas(Mapa& mapa);
+        void resetTextureFromCeldas(Mapa& mapa, AttackDirection latestAttackDirection);
         void resetTextureFromCelda(Mapa& mapa, int objFila, int objCol);
         void updateTextureFromCeldaAndHurtPlayer(Mapa& mapa, Player& player, int objFila, int objCol);
         bool playerIsClose(Player& player);
         AttackDirection guessAttackDirection(Player& player);
+
+        Mapa* mapa;
 };

@@ -2,7 +2,7 @@
 #include "Player.hh"
 #include <iostream>
 
-Skeleton::Skeleton(float vida, int fila, int columna, int mapDimension): Entity(vida, "skeleton", fila, columna, mapDimension), isGoingToAttackSprite(new ItemSprite("test", fila, columna, mapDimension)), isGoingToAttack(false), isAttacking(false), attackDirection(AttackDirection::NONE), currentTimeWithoutAttacking(0) {
+Skeleton::Skeleton(float vida, int fila, int columna, int mapDimension): Entity(vida, "skeleton", fila, columna, mapDimension), isGoingToAttackSprite(new ItemSprite("test", fila, columna, mapDimension)), isGoingToAttack(false), isAttacking(false), attackDirection(AttackDirection::NONE), lastAttackDirection(AttackDirection::NONE), currentTimeWithoutAttacking(0) {
 }
 
 void Skeleton::draw(sf::RenderWindow& window) const {
@@ -17,8 +17,15 @@ void Skeleton::hurt(float damage) {
     if(vida < 0) {
         vida = 0;
     }
+    if(vida == 0) {
+        die();
+    }
     // TODO: Update texture according to vida
     //
+}
+
+void Skeleton::die() {
+    resetTextureFromCeldas(*this->mapa, lastAttackDirection);
 }
 
 bool Skeleton::isDead() const {
@@ -26,38 +33,33 @@ bool Skeleton::isDead() const {
 }
 
 void Skeleton::update(Player& player, Mapa& mapa) {
+    this->mapa = &mapa;
     attackIfPlayerIsClose(player, mapa);
 }
 
 void Skeleton::attackIfPlayerIsClose(Player& player, Mapa& mapa) {
-    isAttacking = false;
+    AttackDirection lastAttackDirection = attackDirection;
+    this->lastAttackDirection = lastAttackDirection;
     if(isGoingToAttack) {
         performAttack(mapa, player);
     }
     else {
         //Esperar attackSpeed
-        if(!isAttacking) {
-            if(currentTimeWithoutAttacking < ATTACK_SPEED) {
-                ++currentTimeWithoutAttacking;
-                if(playerIsClose(player)) {
-                    isGoingToAttack = true;
-                    attackDirection = guessAttackDirection(player);
-                }
-            }
-            else {
-                currentTimeWithoutAttacking = 0;
-            }
+        if(playerIsClose(player)) {
+            isGoingToAttack = true;
+            attackDirection = guessAttackDirection(player);
         }
-    }
-    if(!isAttacking) {
-        resetTextureFromCeldas(mapa);
+        if(isAttacking) {
+            resetTextureFromCeldas(mapa, lastAttackDirection);
+            isAttacking = false;
+        }
     }
 }
 
 void Skeleton::performAttack(Mapa& mapa, Player& player) {
     updateTextureFromCeldas(mapa, player);
-    isAttacking = true;
     isGoingToAttack = false;
+    isAttacking = true;
 }
 
 void Skeleton::updateTextureFromCeldas(Mapa& mapa, Player& player) {
@@ -82,8 +84,8 @@ void Skeleton::updateTextureFromCeldas(Mapa& mapa, Player& player) {
     }
 }
 
-void Skeleton::resetTextureFromCeldas(Mapa& mapa) {
-    switch(attackDirection) {
+void Skeleton::resetTextureFromCeldas(Mapa& mapa, AttackDirection latestAttackDirection) {
+    switch(latestAttackDirection) {
         case AttackDirection::RIGHT:
             resetTextureFromCelda(mapa, fila, columna + 1);
             resetTextureFromCelda(mapa, fila, columna + 2);
