@@ -1,12 +1,9 @@
 objetivo: 5 5
-esqueleto: 3 4
-esqueleto: 4 5
-esqueleto: 2 2
 esqueleto: 3 3
 mapa:
 0 0 1 1 1 0
-0 0 1 6 1 0
-5 0 2 0 0 0
+0 0 1 0 1 0
+5 0 0 0 0 0
 0 0 0 0 0 0
-0 3 3 0 0 0
+0 0 0 0 0 0
 0 0 0 0 0 0

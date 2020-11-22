@@ -22,10 +22,11 @@ class Skeleton: public Entity {
         bool isAttacking; //Esto debería pintar las celdas que sean atacadas con una textura
         AttackDirection attackDirection;
         AttackDirection lastAttackDirection;
-        const int ATTACK_SPEED = 2;
-        int currentTimeWithoutAttacking;
+        const int MAX_FRAMES_WITHOUT_ATTACKING = 3; //2 + (1 de isGoingToAttack)
+        int currentFramesWithoutAttacking;
 
         void attackIfPlayerIsClose(Player& player, Mapa& mapa);
+        void updateFramesWithoutAttacking();
         void performAttack(Mapa& mapa, Player& player);
         void updateTextureFromCeldas(Mapa& mapa, Player& player);
         void resetTextureFromCeldas(Mapa& mapa, AttackDirection latestAttackDirection);

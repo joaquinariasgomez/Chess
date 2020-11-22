@@ -2,7 +2,7 @@
 #include "Player.hh"
 #include <iostream>
 
-Skeleton::Skeleton(float vida, int fila, int columna, int mapDimension): Entity(vida, "skeleton", fila, columna, mapDimension), isGoingToAttackSprite(new ItemSprite("test", fila, columna, mapDimension)), isGoingToAttack(false), isAttacking(false), attackDirection(AttackDirection::NONE), lastAttackDirection(AttackDirection::NONE), currentTimeWithoutAttacking(0) {
+Skeleton::Skeleton(float vida, int fila, int columna, int mapDimension): Entity(vida, "skeleton", fila, columna, mapDimension), isGoingToAttackSprite(new ItemSprite("test", fila, columna, mapDimension)), isGoingToAttack(false), isAttacking(false), attackDirection(AttackDirection::NONE), lastAttackDirection(AttackDirection::NONE), currentFramesWithoutAttacking(MAX_FRAMES_WITHOUT_ATTACKING) {
 }
 
 void Skeleton::draw(sf::RenderWindow& window) const {
@@ -38,26 +38,35 @@ void Skeleton::update(Player& player, Mapa& mapa) {
 }
 
 void Skeleton::attackIfPlayerIsClose(Player& player, Mapa& mapa) {
+    updateFramesWithoutAttacking();
     AttackDirection lastAttackDirection = attackDirection;
     this->lastAttackDirection = lastAttackDirection;
     if(isGoingToAttack) {
         performAttack(mapa, player);
     }
     else {
-        //Esperar attackSpeed
-        if(playerIsClose(player)) {
-            isGoingToAttack = true;
-            attackDirection = guessAttackDirection(player);
+        if(currentFramesWithoutAttacking == MAX_FRAMES_WITHOUT_ATTACKING) {
+            if(playerIsClose(player)) {
+                isGoingToAttack = true;
+                attackDirection = guessAttackDirection(player);
+            }
+            if(isAttacking) {
+                resetTextureFromCeldas(mapa, lastAttackDirection);
+                isAttacking = false;
+            }
         }
-        if(isAttacking) {
-            resetTextureFromCeldas(mapa, lastAttackDirection);
-            isAttacking = false;
-        }
+    }
+}
+
+void Skeleton::updateFramesWithoutAttacking() {
+    if(currentFramesWithoutAttacking < MAX_FRAMES_WITHOUT_ATTACKING) {
+        ++currentFramesWithoutAttacking;
     }
 }
 
 void Skeleton::performAttack(Mapa& mapa, Player& player) {
     updateTextureFromCeldas(mapa, player);
+    currentFramesWithoutAttacking = 0;
     isGoingToAttack = false;
     isAttacking = true;
 }
